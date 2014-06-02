@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>Roquet</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="normalize.css" rel="stylesheet" media="all">
+
+        <style>
+            body {
+                position: fixed;
+                top:0; bottom:0; left:0; right:0;
+                background: #111;
+            }
+            main {
+                width: 800px; height: 480px;
+                margin: auto;
+                position: absolute;
+                top: 0; bottom: 0; left: 0; right: 0;
+                box-shadow: black 0 0 16px;
+            }
+        </style>
+
+        <script src="source/libraries/crafty.js"></script>
+        <script src="source/libraries/hammer.js"></script>
+        <script src="source/libraries/newton.js"></script>
+        <script src="source/libraries/pixi.js"></script>
+
+    </head>
+
+    <body>
+
+        <main>
+            <div id="pixi-container"></div>
+        </main>
+
+        <script src="source/main.js"></script>
+
+    </body>
+
+</html>
