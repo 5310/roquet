@@ -10,6 +10,10 @@
 
     - [ ]   The basics.
         - [ ]   Basic rendering.
+            - [x]   Manually implement Pixi.js color-blending and procedural drawing.
+            - [x]   Plan component and system.
+            - [ ]   Write system.
+            - [ ]   Write component.
         - [ ]   Minimum-viable physics.
         - [ ]   Gestural interaction.
     - [ ]   Gameplay.
