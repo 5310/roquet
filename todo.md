@@ -1,4 +1,4 @@
-- [ ]   Setup:
+- [x]   Setup:
 
     - [x]   Create directory structure.
     - [x]   Create repo files.
@@ -12,12 +12,31 @@
         - [x]   Basic rendering.
             - [x]   Manually implement Pixi.js color-blending and procedural drawing.
             - [x]   Plan component and system.
-            - [x]   Write system.
-            - [x]   Write component.
+            - [x]   Write system: PixiRenderer
+            - [x]   Write component: PixiSprite
+        - [x]   Gestural interaction.
+            - [x]   Test our Hammer, and see if gestures and global-to-local manual conversion is feasible.
+            - [x]   Write the system: Hammerer
+            - [x]   Integrate system into the Pixi renderer's canvas.
         - [ ]   Minimum-viable physics.
-        - [ ]   Gestural interaction.
+            - [ ]   Test if Newton is usable enough feature docs and performance wise.
+            - [ ]   Plan component and system.
+            - [ ]   Write system.
+            - [ ]   Write component.    
+            - [ ]   Implement Color2-based layering.
     - [ ]   Gameplay.
-        - [ ]   The Ball component.
+        - [x]   The Color2 component.
+            - [x]   Make a simple component to store our gameplay colors for reuse by other components.
+                - [x]   Implement a method to change color.
+                - [x]   Implement triggers to update other components.
+            - [x]   Write enums for colors.
+        - [ ]   The Ball component..
+            - [x]   Integrate graphics.
+                - [x]   Team-shapes.
+                    - [X]   Draw the team-shapes to be used as textures.
+                    - [x]   Write enums for shapes.
+                - [x]   Use the Color2 color with a trigger.
+            - [ ]   Integrate physics.
         - [ ]   The Obstacle component.
         - [ ]   The Goal component.
         - [ ]   The Court system.
