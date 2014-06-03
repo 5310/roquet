@@ -5,7 +5,7 @@
 
             stage: undefined,
             renderer: undefined,
-            container: undefined,
+            defaultContainer: undefined,
 
             paused: false,
 
@@ -21,8 +21,8 @@
                 Crafty.PIXIRENDERER.renderer = PIXI.autoDetectRenderer(width, height);
                 parentElement.appendChild(Crafty.PIXIRENDERER.renderer.view);
 
-                Crafty.PIXIRENDERER.container = new PIXI.DisplayObjectContainer();
-                Crafty.PIXIRENDERER.stage.addChild(Crafty.PIXIRENDERER.container);
+                Crafty.PIXIRENDERER.defaultContainer = new PIXI.DisplayObjectContainer();
+                Crafty.PIXIRENDERER.stage.addChild(Crafty.PIXIRENDERER.defaultContainer);
 
                 Crafty.HAMMERER.init(Crafty.PIXIRENDERER.renderer.view);
 

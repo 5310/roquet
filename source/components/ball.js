@@ -144,7 +144,6 @@
                 });
 
                 self.PixiSprite.blendMode = PIXI.blendModes.ADD;
-                Crafty.PIXIRENDERER.container.addChild(self.PixiSprite);
 
             }
         }

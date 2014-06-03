@@ -18,6 +18,7 @@
                 this.PixiSprite = new PIXI.Sprite(blankTexture);
                 this.PixiSprite.anchor.x = 0.5;
                 this.PixiSprite.anchor.y = 0.5;
+                Crafty.PIXIRENDERER.defaultContainer.addChild(this.PixiSprite);
 
             }
         }

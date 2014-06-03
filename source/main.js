@@ -6,8 +6,8 @@ var init = function() {
     Crafty.PIXIRENDERER.init(800, 480, 0x222222, document.getElementById('pixi-container'));
 
     // Center the container.
-    Crafty.PIXIRENDERER.container.x = 400;
-    Crafty.PIXIRENDERER.container.y = 240;
+    Crafty.PIXIRENDERER.defaultContainer.x = 400;
+    Crafty.PIXIRENDERER.defaultContainer.y = 240;
 
     // Add WebGL filter for more uniform color palette.
     var color = new PIXI.ColorMatrixFilter();
@@ -17,7 +17,7 @@ var init = function() {
         0.2, 0, 1, 0,
         0, 0, 0, 1
     ];
-    Crafty.PIXIRENDERER.container.filters = [color];
+    Crafty.PIXIRENDERER.defaultContainer.filters = [color];
 
     // Demo balls.
 
