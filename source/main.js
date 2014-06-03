@@ -21,15 +21,17 @@ var init = function() {
 
     // Demo balls.
 
-    redBall = Crafty.e("Ball")
+    redBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
-        .Color2.setColor(Crafty.COLOR2_COLORS.RED);
-    greenBall = Crafty.e("Ball")
+        .Color2.setColor(Crafty.COLOR2_COLORS.RED)
+        .then(function(){ this.PixiSprite.x -= 10; });
+    greenBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.STAR)
         .Color2.setColor(Crafty.COLOR2_COLORS.GREEN);
-    blueBall = Crafty.e("Ball")
+    blueBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
-        .Color2.setColor(Crafty.COLOR2_COLORS.BLUE);
+        .Color2.setColor(Crafty.COLOR2_COLORS.BLUE)
+        .then(function(){ this.PixiSprite.x += 10; });
 
 };
 
