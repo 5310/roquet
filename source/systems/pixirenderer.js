@@ -30,6 +30,7 @@
 
             draw: function () {
                 if (!Crafty.PIXIRENDERER.paused) {
+                    Crafty.trigger("PixiEnterFrame");
                     Crafty.PIXIRENDERER.renderer.render(Crafty.PIXIRENDERER.stage);
                 }
                 requestAnimationFrame(Crafty.PIXIRENDERER.draw);
