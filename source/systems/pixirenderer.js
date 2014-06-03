@@ -24,6 +24,8 @@
                 Crafty.PIXIRENDERER.container = new PIXI.DisplayObjectContainer();
                 Crafty.PIXIRENDERER.stage.addChild(Crafty.PIXIRENDERER.container);
 
+                Crafty.HAMMERER.init(Crafty.PIXIRENDERER.renderer.view);
+
                 requestAnimationFrame(Crafty.PIXIRENDERER.draw);
 
             },
