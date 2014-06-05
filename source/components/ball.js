@@ -139,8 +139,8 @@
                 };
                 self.Ball.setTeam(Crafty.BALL_TEAMS.STAR);
 
-                self.bind("Color2Change", function (data) {
-                    self.PixiSprite.tint = data.newColor;
+                self.bind("Color2Change", function () {
+                    self.PixiSprite.tint = self.Color2;
                 });
 
                 self.PixiSprite.blendMode = PIXI.blendModes.ADD;

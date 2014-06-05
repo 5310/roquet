@@ -19,19 +19,14 @@
         "Color2",
         {
             init: function() {
-
                 var self = this;
-
-                self.Color2 = {};
-
-                self.Color2._color = undefined;
-                self.Color2.setColor = function (color) {
-                    self.trigger("Color2Change", {oldColor: self.Color2._color, newColor: color});
-                    self.Color2._color = color;
-                    return self;
-                };
-
+                self.Color2 = undefined;
             }
+            Color2Set: function (color) {
+                self.trigger("Color2Change", {oldColor: this.Color2, this: color});
+                self.Color2 = color;
+                return this;
+            };
         }
     );
 
