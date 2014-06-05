@@ -8,7 +8,7 @@
 
 - [ ]   Alpha:
 
-    - [ ]   The basics.
+    - [x]   The basics.
         - [x]   Basic rendering.
             - [x]   Manually implement Pixi.js color-blending and procedural drawing.
             - [x]   Plan component and system.
@@ -18,25 +18,32 @@
             - [x]   Test our Hammer, and see if gestures and global-to-local manual conversion is feasible.
             - [x]   Write the system: Hammerer
             - [x]   Integrate system into the Pixi renderer's canvas.
-        - [ ]   Minimum-viable physics.
-            - [ ]   Test if Newton is usable enough feature docs and performance wise.
-            - [ ]   Plan component and system.
-            - [ ]   Write system.
-            - [ ]   Write component.    
-            - [ ]   Implement Color2-based layering.
+        - [x]   Minimum-viable physics.
+            - [x]   Investigate physics engines and choose one.
+                -   Chose PhysicsJS because it's deliciously hip and modular.
+            - [x]   Test to see if you can use engine or implement features as required.
+                - [x]   Implement color-based collisions.
+                - [x]   Implement proper arbitrary hit-tests.
+            - [x]   Plan component(s) and system.
+            - [x]   Write the system: PhysicsSimulator.
+            - [x]   Write the component: PhysicsBody.
+                - [x] Write a body-configurator.
+                - [x] Write a positioning method.
+                - [x] Write a rotating method.
+            - [ ]   Write a debug-visualizer that re/creates a generic PixiSprite when needed.
     - [ ]   Gameplay.
         - [x]   The Color2 component.
             - [x]   Make a simple component to store our gameplay colors for reuse by other components.
                 - [x]   Implement a method to change color.
                 - [x]   Implement triggers to update other components.
             - [x]   Write enums for colors.
-        - [ ]   The Ball component..
+        - [x]   The Ball component..
             - [x]   Integrate graphics.
                 - [x]   Team-shapes.
                     - [X]   Draw the team-shapes to be used as textures.
                     - [x]   Write enums for shapes.
                 - [x]   Use the Color2 color with a trigger.
-            - [ ]   Integrate physics.
+            - [x]   Integrate physics.
         - [ ]   The Obstacle component.
         - [ ]   The Goal component.
         - [ ]   The Court system.
