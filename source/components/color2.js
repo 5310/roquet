@@ -19,13 +19,13 @@
         "Color2",
         {
             init: function() {
-                this.Color2 = undefined;
-            }
+                this.Color2 = 0xFFFFFF;
+            },
             Color2Set: function (color) {
-                this.trigger("Color2Change", {oldColor: this.Color2, this: color});
                 this.Color2 = color;
+                this.trigger("Color2Change");
                 return this;
-            };
+            }
         }
     );
 
