@@ -125,7 +125,7 @@
         {
             init: function() {
 
-                this.requires("PixiSprite, Color2");
+                this.requires("PixiSprite, Color2, PhysicsBody");
 
                 var self = this;
 
@@ -140,10 +140,16 @@
                 self.Ball.setTeam(Crafty.BALL_TEAMS.STAR);
 
                 self.bind("Color2Change", function () {
-                    self.PixiSprite.tint = self.Color2;
+                    this.PixiSprite.tint = this.Color2;
                 });
 
                 self.PixiSprite.blendMode = PIXI.blendModes.ADD;
+
+                self.PhysicsBodySet('circle', {
+                    restitution: 0.95,
+                    mass: 0.05,
+                    radius: radius
+                });
 
             }
         }
