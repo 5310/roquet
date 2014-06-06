@@ -31,8 +31,8 @@
                 - [x] Write a positioning method.
                 - [x] Write a rotating method.
             - [x]   Write the sprite component: PhysicsSprite.
-                - [ ] Methods to create texture from physics geometries and color.
-                - [ ] Hook to re/apply them after entity creation.
+                - [x] Methods to create texture from physics geometries and color.
+                - [x] Hook to re/apply them after entity creation.
     - [ ]   Gameplay.
         - [x]   The Color2 component.
             - [x]   Make a simple component to store our gameplay colors for reuse by other components.
