@@ -14,14 +14,18 @@
 
                 // Remove preexisting body.
                 if (this.PhysicsBody) {
-                    Crafty.trigger("PhysicsBodyRemoval", {body: this.PhysicsBody});
+                    Crafty.trigger("PhysicsSimulationBodyRemoval", {body: this.PhysicsBody});
                     Crafty.PIXIRENDERER.world.remove(this.PhysicsBody);
+                    this.trigger("PhysicsBodyRemoval");
                 }
 
                 // Add new body.
                 this.PhysicsBody = body;
-                Crafty.trigger("PhysicsBodyAddition", {body: this.PhysicsBody});
+                Crafty.trigger("PhysicsSimulationBodyAddition", {body: this.PhysicsBody});
                 Crafty.PHYSICSSIMULATOR.world.add( this.PhysicsBody );
+                this.trigger("PhysicsBodyAddition");
+
+                return this;
 
             },
             PhysicsBodyPosition: function( x, y ) {
