@@ -42,7 +42,7 @@
                     shape.endFill();
 
                     if ( typeof self.PhysicsSprite.overlay === "function" ) {
-                        self.PhysicsSprite.overlay(shape);
+                        self.PhysicsSprite.overlay(shape, self);
                     }
 
                     self.PixiSprite.setTexture(shape.generateTexture());
