@@ -92,31 +92,18 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .then(function(){ this.PhysicsBodyPosition(100+50, 100); });
 
-    box = Crafty.e("Thennable", "PhysicsSprite")
-        .PhysicsBodySet('convex-polygon', {
-            vertices: [
-                { x: -50, y: -50 },
-                { x: -50, y: 50 },
-                { x: 50, y: 50 },
-                { x: 50, y: -50 }
-            ],
-        })
-        .then(function(){
-            this.PhysicsBodyPosition(400, 200);
-
-            this.PhysicsSprite.setOverlay(function(shape) {
-                shape.beginFill(0x000000);
-                var hexSpoke = 16*0.7;
-                shape.moveTo(0, -hexSpoke);
-                shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                shape.lineTo(0, hexSpoke);
-                shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                shape.endFill();
-            });
-
-        });
+//    box = Crafty.e("Thennable", "PhysicsSprite")
+//        .PhysicsBodySet('convex-polygon', {
+//            vertices: [
+//                { x: -50, y: -50 },
+//                { x: -50, y: 50 },
+//                { x: 50, y: 50 },
+//                { x: 50, y: -50 }
+//            ],
+//        })
+//        .then(function(){
+//            this.PhysicsBodyPosition(400, 200);
+//        });
 
     floor = Crafty.e("Thennable", "PhysicsSprite")
         .PhysicsBodySet('convex-polygon', {
