@@ -47,12 +47,12 @@
                             contained = point.dist(hit.state.pos) <= hit.radius;
                             break;
 
-                        case "convex-polygonx":
+                        case "convex-polygon":
                             var translatedPoint = point.clone().vsub(hit.state.pos).rotate(hit.state.angular.pos); // note the v in vsub.
                             contained = Physics.geometry.isPointInPolygon(translatedPoint, hit.geometry.vertices);
                             break;
 
-                        case "convex-polygon":
+                        case "rectangle":
                             var translatedPoint = point.clone().vsub(hit.state.pos).rotate(hit.state.angular.pos); // note the v in vsub.
                             contained = Math.abs(translatedPoint.x) <= hit.width/2 && Math.abs(translatedPoint.y) <= hit.height/2;
                             break;
