@@ -16,6 +16,7 @@
                 self.PhysicsSprite.generateSprite = function() {
 
                     var shape = new PIXI.Graphics();
+                    shape.boundsPadding = 0;
                     shape.beginFill(0xFFFFFF);
                     switch (self.PhysicsBody.name) {
 
@@ -25,11 +26,18 @@
 
                         case "convex-polygon":
                             var vertices = self.PhysicsBody.geometry.vertices;
-                            shape.moveTo(vertices.x, vertices.y);
-                            for (var i = 0; i < vertices.length; i++){
-                                var vert = vertices[i];
-                                shape.lineTo(vert.x, vert.y);
+                            var minX = vertices[0].x;
+                            var minY = vertices[0].y;
+                            shape.moveTo(vertices[0].x, vertices[0].y);
+                            for (var i = 1; i < vertices.length; i++){
+                                var vertex = vertices[i];
+                                shape.lineTo(vertex.x, vertex.y);
+                                minX = vertex.x < minX ? vertex.x : minX;
+                                minY = vertex.y < minY ? vertex.y : minY;
                             }
+                            //Note: Without acknowledging the padding added by the graphics object, the anchor will still be wrong. And without padding strokes will get cut off.
+                            self.PixiSprite.anchor.x = (Math.abs(minX)+shape.boundsPadding)/shape.width;
+                            self.PixiSprite.anchor.y = (Math.abs(minY)+shape.boundsPadding)/shape.height;
                             break;
 
                         case "rectangle":
