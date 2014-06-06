@@ -103,6 +103,19 @@ var init = function() {
         })
         .then(function(){
             this.PhysicsBodyPosition(400, 200);
+
+            this.PhysicsSprite.setOverlay(function(shape) {
+                shape.beginFill(0x000000);
+                var hexSpoke = 16*0.7;
+                shape.moveTo(0, -hexSpoke);
+                shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
+                shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
+                shape.lineTo(0, hexSpoke);
+                shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
+                shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
+                shape.endFill();
+            });
+
         });
 
     floor = Crafty.e("Thennable", "PhysicsSprite")
