@@ -52,24 +52,6 @@ var init = function() {
         world.render();
     });
 
-//    // Dummy floor for tests.
-//    floor = Physics.body('convex-polygon', {
-//        // place the centroid of the polygon at (300, 200)
-//        x: 400,
-//        y: 400,
-//        width: 800,
-//        height: 60,
-//        restitution: 0.5,
-//        // the centroid is automatically calculated and used to position the shape
-//        vertices: [
-//            { x: -400, y: -30 },
-//            { x: -400, y: 30 },
-//            { x: 400, y: 30 }
-//        ],
-//    });
-//    world.add( floor );
-//    floor.entity = {Color2: 0xFFFFFF};
-
     // Test for hit-test.
     Crafty.bind("HammerTap", function(data) {
         console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
@@ -92,23 +74,23 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .then(function(){ this.PhysicsBodyPosition(100+50, 100); });
 
-//    box = Crafty.e("Thennable", "PhysicsSprite")
-//        .PhysicsBodySet('convex-polygon', {
-//            vertices: [
-//                { x: -50, y: -50 },
-//                { x: -50, y: 50 },
-//                { x: 50, y: 50 },
-//                { x: 50, y: -50 }
-//            ],
-//        })
-//        .then(function(){
-//            this.PhysicsBodyPosition(400, 200);
-//        });
-
-    floor = Crafty.e("Thennable", "PhysicsSprite")
+    box = Crafty.e("Thennable", "Obstacle")
         .PhysicsBodySet('convex-polygon', {
+            x: 400,
+            y: 200,
+            vertices: [
+                { x: -50, y: -50 },
+                { x: -50, y: 50 },
+                { x: 50, y: 50 },
+                { x: 50, y: -50 }
+            ],
+        });
+
+    floor = Crafty.e("Thennable", "Obstacle")
+        .PhysicsBodySet('convex-polygon', {
+            x: 400,
+            y: 400,
             restitution: 0.5,
-            // the centroid is automatically calculated and used to position the shape
             vertices: [
                 { x: -400, y: -30 },
                 { x: -400, y: 30 },
@@ -117,7 +99,6 @@ var init = function() {
             ],
         })
         .then(function(){
-            this.PhysicsBodyPosition(400, 400);
             this.PixiSprite.pivot.x = -134;
             this.PixiSprite.pivot.y = 10;
         });
