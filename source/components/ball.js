@@ -142,6 +142,7 @@
                 self.bind("Color2Change", function () {
                     this.PixiSprite.tint = this.Color2;
                 });
+                this.PixiSprite.tint = this.Color2;
 
                 self.PixiSprite.blendMode = PIXI.blendModes.ADD;
 
