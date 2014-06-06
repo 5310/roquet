@@ -17,14 +17,14 @@
     // Array of shape overlay routines.
     var shapeOverlays = [];
     shapeOverlays[Crafty.BALL_TEAMS.QUAD] = function(shape, self) {
-        var radius = self.Ball.radius;
+        var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var squareWidth = radius;
         shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
         shape.endFill();
     };
     shapeOverlays[Crafty.BALL_TEAMS.TRI] = function(shape, self) {
-        var radius = self.Ball.radius;
+        var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var triSpoke = radius*0.8;
         shape.moveTo(0, -triSpoke);
@@ -39,7 +39,7 @@
         shape.endFill();
     };
     shapeOverlays[Crafty.BALL_TEAMS.STAR] = function(shape, self) {
-        var radius = self.Ball.radius;
+        var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var starSpoke = radius*0.75;
         var starCrease = 0.6;
@@ -83,7 +83,7 @@
         shape.endFill();
     };
     shapeOverlays[Crafty.BALL_TEAMS.HEX] = function(shape, self) {
-        var radius = self.Ball.radius;
+        var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var hexSpoke = radius*0.7;
         shape.moveTo(0, -hexSpoke);
@@ -107,10 +107,10 @@
 
                 self.Ball = {};
 
-                self.Ball.radius = 16;
+                self.Ball._radius = 16;
                 self.Ball.team = 1;
 
-                self.Ball.setRadius = function(radius) {
+                self.Ball._setRadius = function(radius) {
                     self.Ball.radius = radius;
                     //TODO: Change body in-place, keeping all of state.
                     self.Ball._setPhysicsBody();
@@ -121,7 +121,7 @@
                     self.PhysicsBodySet('circle', {
                         restitution: 0.95,
                         mass: 0.05,
-                        radius: self.Ball.radius
+                        radius: self.Ball._radius
                     });
                 };
                 self.Ball._setPhysicsBody();
