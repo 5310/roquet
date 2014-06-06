@@ -47,9 +47,11 @@
                 - [x]   Use the Color2 color with a trigger.
             - [x]   Integrate physics.
         - [ ]   The Obstacle component.
-            -   Probably just a tag, as we already have the basic functionality implemented.
-            -   Should at least set balanced mass, restitution, etc.
+        - [ ]   The Field component.
+            - [ ]   Write the PhysicsJS behavior that applies method from field bodies upon intersection.
+            - [ ]   Write the component.
         - [ ]   The Goal component.
+        - [ ]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
         - [ ]   The Court system.
             - [ ]   Static obstacles generation and ball placement.
             - [ ]   Turn engine.
