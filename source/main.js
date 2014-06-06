@@ -46,18 +46,10 @@ var init = function() {
     // Add collision impulses only for roquet collisions.
     world.add( Physics.behavior('roquet-collision-filter') );
 
-    //TODO: Custom renderer that updates entity.PixiSprite
-    Crafty.bind("PixiEnterFrame", function(){
-        var bodies = Crafty.PHYSICSSIMULATOR.world.getBodies();
-        for ( var i = 0; i < bodies.length; i++ ) {
-            var body = bodies[i];
-            //NOTE: Inelegant, but works. Ideally, you should be checking for entity and then if it has the PixiSprite component.
-            try {
-                body.entity.PixiSprite.x = body.state.pos.x;
-                body.entity.PixiSprite.y = body.state.pos.y;
-                body.entity.PixiSprite.rotation = body.state.angular.pos;
-            } catch (e) {}
-        }
+    // Add custom renderer.
+    world.add( Physics.renderer('pixi-sprite-updater'));
+    world.on('step', function(){
+        world.render();
     });
 
     // Dummy floor for tests.
