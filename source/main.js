@@ -79,10 +79,10 @@ var init = function() {
             x: 400,
             y: 200,
             vertices: [
-                { x: -50, y: -50 },
-                { x: -50, y: 50 },
-                { x: 50, y: 50 },
-                { x: 50, y: -50 }
+                { x: 0, y: 0 },
+                { x: 0, y: 50 },
+                { x: 100, y: 50 },
+                { x: 100, y: 0 }
             ],
         });
 
@@ -96,11 +96,7 @@ var init = function() {
                 { x: -400, y: 30 },
                 { x: 400, y: 30 },
 //                { x: 400, y: -30 },
-            ],
-        })
-        .then(function(){
-            this.PixiSprite.pivot.x = -134;
-            this.PixiSprite.pivot.y = 10;
+            ]
         });
 
 };
