@@ -15,7 +15,7 @@
                 // Remove preexisting body.
                 if (this.PhysicsBody) {
                     Crafty.trigger("PhysicsSimulationBodyRemoval", {body: this.PhysicsBody});
-                    Crafty.PIXIRENDERER.world.remove(this.PhysicsBody);
+                    Crafty.PHYSICSSIMULATOR.world.remove(this.PhysicsBody);
                     this.trigger("PhysicsBodyRemoval");
                 }
 
