@@ -26,11 +26,13 @@
                 - [x]   Implement proper arbitrary hit-tests.
             - [x]   Plan component(s) and system.
             - [x]   Write the system: PhysicsSimulator.
-            - [x]   Write the component: PhysicsBody.
+            - [x]   Write the body component: PhysicsBody.
                 - [x] Write a body-configurator.
                 - [x] Write a positioning method.
                 - [x] Write a rotating method.
-            - [ ]   Write a debug-visualizer that re/creates a generic PixiSprite when needed.
+            - [x]   Write the sprite component: PhysicsSprite.
+                - [ ] Methods to create texture from physics geometries and color.
+                - [ ] Hook to re/apply them after entity creation.
     - [ ]   Gameplay.
         - [x]   The Color2 component.
             - [x]   Make a simple component to store our gameplay colors for reuse by other components.
@@ -45,6 +47,8 @@
                 - [x]   Use the Color2 color with a trigger.
             - [x]   Integrate physics.
         - [ ]   The Obstacle component.
+            -   Probably just a tag, as we already have the basic functionality implemented.
+            -   Should at least set balanced mass, restitution, etc.
         - [ ]   The Goal component.
         - [ ]   The Court system.
             - [ ]   Static obstacles generation and ball placement.
