@@ -24,7 +24,7 @@
                     var collision = data.collisions[i];
                     //NOTE: Inelegant, but works. Ideally, you should be checking for entity and then if it has the Color2 component.
                     try {
-                        if ( collision.bodyA.entity.Color2 & collision.bodyB.entity.Color2 ) {
+                        if ( collision.bodyA.entity.Color2Collision & collision.bodyB.entity.Color2Collision ) {
                             collisions.push(collision);
                         }
                     } catch (e) {}
