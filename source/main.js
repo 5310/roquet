@@ -23,6 +23,11 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
+    // Add gravity.
+    world.add( Physics.behavior('constant-acceleration', {
+        acc: { x : 0, y: 0.0004 } // this is the default
+    }) );
+
     // Set integrator and drag.
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
 
@@ -43,6 +48,9 @@ var init = function() {
 
     // Add collision impulses only for roquet collisions.
     world.add( Physics.behavior('roquet-collision-filter') );
+
+    // Add field behavior.
+    world.add( Physics.behavior('roquet-collision-field') );
 
     // Add custom renderer.
     world.add( Physics.renderer('pixi-sprite-updater'));
@@ -72,16 +80,21 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .PhysicsBodyPosition(100+50, 100);
 
-    box = Crafty.e("Thennable", "Obstacle")
+    attractor = Crafty.e("Thennable", "PhysicsBody", "PhysicsFieldAttractor", "Color2", "PhysicsSprite")
         .PhysicsBodySet('convex-polygon', {
+            treatment: 'static',
             x: 400,
             y: 200,
             vertices: [
                 { x: 0, y: 0 },
                 { x: 0, y: 50 },
-                { x: 100, y: 50 },
-                { x: 100, y: 0 }
+                { x: 800, y: 50 },
+                { x: 800, y: 0 }
             ],
+        })
+        .Color2Set(Crafty.COLOR2_COLORS.DGRAY)
+        .then(function() {
+            this.PhysicsFieldAttractor.strength = 10;
         });
 
     floor = Crafty.e("Thennable", "Obstacle")
