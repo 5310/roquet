@@ -63,15 +63,15 @@ var init = function() {
     redBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
         .Color2Set(Crafty.COLOR2_COLORS.RED)
-        .then(function(){ this.PhysicsBodyPosition(100-50, 100); });
+        .PhysicsBodyPosition(100-50, 100);
     greenBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.STAR)
         .Color2Set(Crafty.COLOR2_COLORS.GREEN)
-        .then(function(){ this.PhysicsBodyPosition(100, 100); });
+        .PhysicsBodyPosition(100, 100);
     blueBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
-        .then(function(){ this.PhysicsBodyPosition(100+50, 100); });
+        .PhysicsBodyPosition(100+50, 100);
 
     box = Crafty.e("Thennable", "Obstacle")
         .PhysicsBodySet('convex-polygon', {
