@@ -119,12 +119,16 @@
 
                 self.Ball._setPhysicsBody = function() {
                     self.PhysicsBodySet('circle', {
-                        restitution: 0.95,
-                        mass: 0.05,
+                        restitution: 0.9,
+                        mass: 0.01,
                         radius: self.Ball._radius
                     });
                 };
                 self.Ball._setPhysicsBody();
+                //NOTE: The above properties have been prelimianarily balanced to have the most suitable feel
+                //in terms of movement and collisions with default Obstacle entities.
+                //With it, a suitable region of force has been tested to be applied for putting the Balls of that mass. It's around 0.002.
+
                 self.Ball.setTeam = function ( team ) {
                     self.Ball.team = team | Crafty.BALL_TEAMS.NONE;
                     self.PhysicsSprite.setOverlay(shapeOverlays[self.Ball.team]);

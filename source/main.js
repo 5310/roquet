@@ -37,8 +37,7 @@ var init = function() {
     // Add roquet collision filters.
     world.add( Physics.behavior('edge-collision-detection', {
         aabb: Physics.aabb(0, 0, 800, 480),
-        restitution: 0.2,
-        cof: 0.8,
+        restitution: 0.8,
         channel: 'roquet:collisions:detected'
     }) );
     world.add( Physics.behavior('body-impulse-response', { check: 'roquet:collisions:detected' })  );
@@ -90,7 +89,6 @@ var init = function() {
         .PhysicsBodySet('convex-polygon', {
             x: 400,
             y: 400,
-            restitution: 0.5,
             vertices: [
                 { x: -400, y: -30 },
                 { x: -400, y: 30 },

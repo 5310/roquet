@@ -51,7 +51,7 @@
             - [ ]   Write the PhysicsJS behavior that applies method from field bodies upon intersection.
             - [ ]   Write the component.
         - [ ]   The Goal component.
-        - [ ]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
+        - [x]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
         - [ ]   The Court system.
             - [ ]   Static obstacles generation and ball placement.
             - [ ]   Turn engine.
