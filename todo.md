@@ -6,7 +6,7 @@
     - [x]   Create boilerplate files.
     - [x]   Breakdown tasks.
 
-- [ ]   Alpha:
+- [x]   Alpha:
 
     - [x]   The basics.
         - [x]   Basic rendering.
@@ -35,7 +35,7 @@
             - [x]   Write the sprite component: PhysicsSprite.
                 - [x] Methods to create texture from physics geometries and color.
                 - [x] Hook to re/apply them after entity creation.
-    - [ ]   Gameplay.
+    - [x]   Gameplay.
         - [x]   The Color2 component.
             - [x]   Make a simple component to store our gameplay colors for reuse by other components.
                 - [x]   Implement a method to change color.
@@ -48,25 +48,30 @@
                     - [x]   Write enums for shapes.
                 - [x]   Use the Color2 color with a trigger.
             - [x]   Integrate physics.
-        - [ ]   The Obstacle component.
-        - [ ]   The Field component.
-            - [ ]   Write the PhysicsJS behavior that applies method from field bodies upon intersection.
-            - [ ]   Write the component.
-        - [ ]   The Goal component.
+        - [x]   The Obstacle component.
+        - [x]   The Field components.
+            - [x]   Write the PhysicsJS behavior that applies method from field bodies upon intersection.
+            - [x]   Write the component.
         - [x]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
+
+- [ ]   Beta:
+
+    - [ ]   Gameplay.
+        - [ ]   The Goal component.
+            - [ ]   Compose component with base components such as the attractor field.
+            - [ ]   Custom field to slow down bodies gradually and only trigger the goal event if slow enough and close to the center.
         - [ ]   The Court system.
             - [ ]   Static obstacles generation and ball placement.
             - [ ]   Turn engine.
             - [ ]   Ball selection and shots.
             - [ ]   Scoring.
-
-- [ ]   Beta:
-
-    - [ ]   Gameplay.
-        - [ ]   The Field component.
         - [ ]   Turn-engine.
             - [ ]   Pausing, at least bewteen turns.
             - [ ]   Time-scaling and slow-time for dramatic moments.
+        - [ ]   More Field components.
+            - [ ]   Conveyor
+            - [ ]   Rotator
+            - [ ]   Overlay-based stextures for all these?
     
     - [ ]   Data-driven level generation.
         - [ ]   Obstacle and field generation.
