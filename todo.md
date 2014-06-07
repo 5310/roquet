@@ -24,6 +24,7 @@
             - [x]   Test to see if you can use engine or implement features as required.
                 - [x]   Implement color-based collisions.
                 - [x]   Implement proper arbitrary hit-tests.
+                - [ ]   Implement a custom dynamic drag behavior that slows down slower bodies more than faster ones.
             - [x]   Plan component(s) and system.
             - [x]   Write the system: PhysicsSimulator.
             - [x]   Write the body component: PhysicsBody.
