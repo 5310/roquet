@@ -15,8 +15,6 @@ var init = function() {
     ];
     Crafty.PIXIRENDERER.defaultContainer.filters = [color];
 
-
-
     /* Initialize physics. */
 
     // Initialize the base world.
@@ -25,10 +23,11 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
-    // Add gravity.
-    world.add( Physics.behavior('constant-acceleration', {
-        acc: { x : 0, y: 0.0004 } // this is the default
-    }) );
+    // Set integrator and drag.
+    world.add( Physics.integrator('verlet', {drag: 0.001}) );
+
+    // Add a maximum velocity clamp.
+    world.add( Physics.behavior('roquet-velocity-clamp', { max: 0.5 }) );
 
     // Add basic collision detection
     world.add( Physics.behavior('sweep-prune') );
