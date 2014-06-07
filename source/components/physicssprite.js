@@ -7,7 +7,7 @@
 
                 var self = this;
 
-                self.requires("PhysicsBody, PixiSprite, Color2");
+                self.requires("PhysicsBody, PixiSprite");
 
                 self.PhysicsSprite = {};
 
@@ -55,7 +55,6 @@
 
                     self.PixiSprite.setTexture(shape.generateTexture());
 
-                    self.PixiSprite.tint = self.Color2;
                     self.PixiSprite.blendMode = PIXI.blendModes.ADD;
 
                 };
