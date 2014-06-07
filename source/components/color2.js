@@ -3,7 +3,7 @@
     Crafty.extend({
         COLOR2_COLORS: {
             BACK: 0x000000,
-            DGRAY: 0x222222,
+            DGRAY: 0x060606,
             LGRAY: 0x999999,
             WHITE: 0xFFFFFF,
             RED: 0xFF0000,
