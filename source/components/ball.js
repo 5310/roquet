@@ -101,7 +101,7 @@
         {
             init: function() {
 
-                this.requires("PixiSprite, Color2, PhysicsBody, PhysicsSprite");
+                this.requires("PixiSprite, Color2, PhysicsBody, Color2Collision, PhysicsSprite");
 
                 var self = this;
 
