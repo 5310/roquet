@@ -4268,6 +4268,7 @@ Physics.geometry.nearestPointOnLine = function nearestPointOnLine( pt, linePt1, 
              *
              **/
             this.options = Physics.util.options( defaults );
+            this.options(options);
         },
 
         /**
