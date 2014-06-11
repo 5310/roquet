@@ -25,7 +25,7 @@ var init = function() {
 
     // Add gravity.
     world.add( Physics.behavior('constant-acceleration', {
-        acc: { x : 0, y: 0.0004 } // this is the default
+        acc: { x : 0, y: 0.0001 } // this is the default
     }) );
 
     // Set integrator and drag.
@@ -83,24 +83,8 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .PhysicsBodyPosition(100+50, 100);
 
-    attractor = Crafty.e("Thennable", "PhysicsBody", "PhysicsFieldAttractor", "Color2", "PhysicsSprite")
-        .PhysicsBodySet('convex-polygon', {
-            treatment: 'static',
-            x: 400,
-            y: 200,
-            vertices: [
-                { x: 0, y: 0 },
-                { x: 0, y: 50 },
-                { x: 800, y: 50 },
-                { x: 800, y: 0 }
-            ],
-        })
-        .Color2Set(Crafty.COLOR2_COLORS.DGRAY)
-        .then(function() {
-            this.PhysicsFieldAttractor.strength = 0.01;
-            this.PhysicsFieldAttractor.order = 0.5;
-            this.PhysicsFieldAttractor.friction = 0.99;
-        });
+    attractor = Crafty.e("Thennable", "Goal")
+        .PhysicsBodyPosition(150, 240);
 
     floor = Crafty.e("Thennable", "Obstacle")
         .PhysicsBodySet('convex-polygon', {
