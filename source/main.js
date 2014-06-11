@@ -32,7 +32,7 @@ var init = function() {
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
 
     // Add a maximum velocity clamp.
-    world.add( Physics.behavior('roquet-velocity-clamp', { max: 0.5 }) );
+    world.add( Physics.behavior('roquet-velocity-clamp', { max: 1.5 }) );
 
     // Add an angular velocity damper.
     world.add( Physics.behavior('roquet-angular-damp', { factor: 0.99 }) );
@@ -82,6 +82,18 @@ var init = function() {
         .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .PhysicsBodyPosition(100+50, 100);
+    yellowBall = Crafty.e("Thennable", "Ball")
+        .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
+        .Color2Set(Crafty.COLOR2_COLORS.YELLOW)
+        .PhysicsBodyPosition(100-50+20, 100+50);
+    cyanBall = Crafty.e("Thennable", "Ball")
+        .Ball.setTeam(Crafty.BALL_TEAMS.STAR)
+        .Color2Set(Crafty.COLOR2_COLORS.CYAN)
+        .PhysicsBodyPosition(100+20, 100+50);
+    magentaBall = Crafty.e("Thennable", "Ball")
+        .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
+        .Color2Set(Crafty.COLOR2_COLORS.MAGENTA)
+        .PhysicsBodyPosition(100+50+20, 100+50);
 
     attractor = Crafty.e("Thennable", "Goal")
         .PhysicsBodyPosition(150, 240);
@@ -97,6 +109,55 @@ var init = function() {
 //                { x: 400, y: -30 },
             ]
         });
+
+    var pushBall = undefined;
+    var pullPoint = undefined;
+    Crafty.bind("HammerHoldStart", function(data){
+        var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
+        pushBall = undefined;
+        for (var i = 0; i < bodies.length; i++ ) {
+            var body = bodies[i];
+            if ( body.entity.Ball ) {
+                pushBall = body.entity;
+                break;
+            }
+        }
+        pullPoint = undefined;
+        if ( !pushBall ) {
+            pullPoint = new Physics.vector(data.point.x, data.point.y);
+        }
+    });
+    Crafty.bind("HammerHoldEnd", function(data){
+        var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
+        var maxForce = 0.002;
+        var maxLength = 200;
+        if (pushBall) {
+            var force = new Physics.vector(data.point.x, data.point.y);
+            force.vsub(pushBall.PhysicsBody.state.pos);
+            var length = force.norm();
+                console.log(length);
+            force.normalize().mult((length > maxLength ? maxForce : maxForce*length/maxLength));
+            pushBall.PhysicsBody.applyForce(force);
+        }
+        else if (pullPoint) {
+            var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
+            var pullBall = undefined;
+            for (var i = 0; i < bodies.length; i++ ) {
+                var body = bodies[i];
+                if ( body.entity.Ball ) {
+                    pullBall = body.entity;
+                    break;
+                }
+            }
+            if (pullBall) {
+                var force = new Physics.vector(pullPoint.x, pullPoint.y);
+                force.vsub(pullBall.PhysicsBody.state.pos);
+                var length = force.norm();
+                force.normalize().mult(-1*(length > maxLength ? maxForce : maxForce*length/maxLength));
+                pullBall.PhysicsBody.applyForce(force);
+            }
+        }
+    });
 
 };
 
