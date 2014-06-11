@@ -4,6 +4,10 @@
 
         var body = data.body;
 
+        if ( !body.entity.Ball ) {
+            return;
+        }
+
         var speed = body.state.vel.clone().norm();
 
         var valid = false;
