@@ -4,6 +4,10 @@
 
         var body = data.body;
 
+        if ( !body.entity.PhysicsFieldCollision ) {
+            return;
+        }
+
         // clone the position
         var acc = this.PhysicsBody.state.pos.clone();
         acc.vsub( body.state.pos );
