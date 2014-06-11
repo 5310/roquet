@@ -11,11 +11,14 @@
         // get the distance
         var norm = acc.norm();
 
-        // get the g
-        var g = this.PhysicsFieldAttractor.strength / Math.pow(norm, this.PhysicsFieldAttractor.order);
+        // get the attraction factor
+        var f = body.mass * this.PhysicsFieldAttractor.strength * Math.pow(norm, this.PhysicsFieldAttractor.order);
+
+        // dampen the body
+        body.state.vel.mult(this.PhysicsFieldAttractor.friction);
 
         // apply acceleration
-        body.accelerate( acc.normalize().mult( g ) );
+        body.accelerate( acc.normalize().mult(f) );
 
     };
 
@@ -28,8 +31,9 @@
 
                 this.PhysicsFieldAttractor = {};
 
-                this.PhysicsFieldAttractor.strength = 1;
-                this.PhysicsFieldAttractor.order = 2;
+                this.PhysicsFieldAttractor.strength = 0.01;
+                this.PhysicsFieldAttractor.order = 0.5;
+                this.PhysicsFieldAttractor.friction = 0.99;
 
                 this.bind("PhysicsField", field.bind(this));
             },
