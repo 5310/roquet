@@ -94,7 +94,9 @@ var init = function() {
         })
         .Color2Set(Crafty.COLOR2_COLORS.DGRAY)
         .then(function() {
-            this.PhysicsFieldAttractor.strength = 10;
+            this.PhysicsFieldAttractor.strength = 0.01;
+            this.PhysicsFieldAttractor.order = 0.5;
+            this.PhysicsFieldAttractor.friction = 0.99;
         });
 
     floor = Crafty.e("Thennable", "Obstacle")

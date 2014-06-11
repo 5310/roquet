@@ -31,9 +31,9 @@
 
                 this.PhysicsFieldAttractor = {};
 
-                this.PhysicsFieldAttractor.strength = 0.01;
-                this.PhysicsFieldAttractor.order = 0.5;
-                this.PhysicsFieldAttractor.friction = 0.99;
+                this.PhysicsFieldAttractor.strength = 1;
+                this.PhysicsFieldAttractor.order = -2;
+                this.PhysicsFieldAttractor.friction = 1;
 
                 this.bind("PhysicsField", field.bind(this));
             },
