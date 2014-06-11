@@ -34,6 +34,9 @@ var init = function() {
     // Add a maximum velocity clamp.
     world.add( Physics.behavior('roquet-velocity-clamp', { max: 0.5 }) );
 
+    // Add an angular velocity damper.
+    world.add( Physics.behavior('roquet-angular-damp', { factor: 0.99 }) );
+
     // Add basic collision detection
     world.add( Physics.behavior('sweep-prune') );
     world.add( Physics.behavior('body-collision-detection') );
