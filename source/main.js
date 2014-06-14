@@ -23,10 +23,10 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
-    // Add gravity.
-    world.add( Physics.behavior('constant-acceleration', {
-        acc: { x : 0, y: 0.0001 } // this is the default
-    }) );
+//    // Add gravity.
+//    world.add( Physics.behavior('constant-acceleration', {
+//        acc: { x : 0, y: 0.0001 } // this is the default
+//    }) );
 
     // Set integrator and drag.
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
@@ -66,6 +66,9 @@ var init = function() {
         console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
     });
 
+
+    /* Initialize the court. */
+    Crafty.COURT.init();
 
 
     /* Add entities. */
@@ -109,55 +112,6 @@ var init = function() {
 //                { x: 400, y: -30 },
             ]
         });
-
-    var pushBall = undefined;
-    var pullPoint = undefined;
-    Crafty.bind("HammerHoldStart", function(data){
-        var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
-        pushBall = undefined;
-        for (var i = 0; i < bodies.length; i++ ) {
-            var body = bodies[i];
-            if ( body.entity.Ball ) {
-                pushBall = body.entity;
-                break;
-            }
-        }
-        pullPoint = undefined;
-        if ( !pushBall ) {
-            pullPoint = new Physics.vector(data.point.x, data.point.y);
-        }
-    });
-    Crafty.bind("HammerHoldEnd", function(data){
-        var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
-        var maxForce = 0.002;
-        var maxLength = 200;
-        if (pushBall) {
-            var force = new Physics.vector(data.point.x, data.point.y);
-            force.vsub(pushBall.PhysicsBody.state.pos);
-            var length = force.norm();
-                console.log(length);
-            force.normalize().mult((length > maxLength ? maxForce : maxForce*length/maxLength));
-            pushBall.PhysicsBody.applyForce(force);
-        }
-        else if (pullPoint) {
-            var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
-            var pullBall = undefined;
-            for (var i = 0; i < bodies.length; i++ ) {
-                var body = bodies[i];
-                if ( body.entity.Ball ) {
-                    pullBall = body.entity;
-                    break;
-                }
-            }
-            if (pullBall) {
-                var force = new Physics.vector(pullPoint.x, pullPoint.y);
-                force.vsub(pullBall.PhysicsBody.state.pos);
-                var length = force.norm();
-                force.normalize().mult(-1*(length > maxLength ? maxForce : maxForce*length/maxLength));
-                pullBall.PhysicsBody.applyForce(force);
-            }
-        }
-    });
 
 };
 
