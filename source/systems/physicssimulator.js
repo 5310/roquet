@@ -14,13 +14,13 @@
                 Crafty.PHYSICSSIMULATOR.world = Physics(options);
 
                 Physics.util.ticker.on(function( time ){
-                    Crafty.PHYSICSSIMULATOR.tick( time );
+                    Crafty.PHYSICSSIMULATOR._tick( time );
                 });
                 Physics.util.ticker.start();
 
             },
 
-            tick: function (time) {
+            _tick: function (time) {
                 if (!Crafty.PHYSICSSIMULATOR.paused) {
                     Crafty.trigger("PhysicsEnterFrame");
                     Crafty.PHYSICSSIMULATOR.world.step(time);

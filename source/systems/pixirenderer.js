@@ -26,16 +26,16 @@
 
                 Crafty.HAMMERER.init(Crafty.PIXIRENDERER.renderer.view);
 
-                requestAnimationFrame(Crafty.PIXIRENDERER.draw);
+                requestAnimationFrame(Crafty.PIXIRENDERER._draw);
 
             },
 
-            draw: function () {
+            _draw: function () {
                 if (!Crafty.PIXIRENDERER.paused) {
                     Crafty.trigger("PixiEnterFrame");
                     Crafty.PIXIRENDERER.renderer.render(Crafty.PIXIRENDERER.stage);
                 }
-                requestAnimationFrame(Crafty.PIXIRENDERER.draw);
+                requestAnimationFrame(Crafty.PIXIRENDERER._draw);
             }
 
         }
