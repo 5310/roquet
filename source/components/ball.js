@@ -1,29 +1,18 @@
 (function () {
 
-    // Team shape enum.
-    Crafty.extend({
-        BALL_TEAMS: {
-            NONE: 0,
-            QUAD: 1,
-            TRI: 2,
-            STAR: 3,
-            HEX: 4
-        }
-    });
-
     // Base radius.
     var radius = 16;
 
     // Array of shape overlay routines.
     var shapeOverlays = [];
-    shapeOverlays[Crafty.BALL_TEAMS.QUAD] = function(shape, self) {
+    shapeOverlays[Crafty.COURT.teams.QUAD] = function(shape, self) {
         var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var squareWidth = radius;
         shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
         shape.endFill();
     };
-    shapeOverlays[Crafty.BALL_TEAMS.TRI] = function(shape, self) {
+    shapeOverlays[Crafty.COURT.teams.TRI] = function(shape, self) {
         var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var triSpoke = radius*0.8;
@@ -38,7 +27,7 @@
         );
         shape.endFill();
     };
-    shapeOverlays[Crafty.BALL_TEAMS.STAR] = function(shape, self) {
+    shapeOverlays[Crafty.COURT.teams.STAR] = function(shape, self) {
         var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var starSpoke = radius*0.75;
@@ -82,7 +71,7 @@
         );
         shape.endFill();
     };
-    shapeOverlays[Crafty.BALL_TEAMS.HEX] = function(shape, self) {
+    shapeOverlays[Crafty.COURT.teams.HEX] = function(shape, self) {
         var radius = self.Ball._radius;
         shape.beginFill(0x000000);
         var hexSpoke = radius*0.7;
@@ -130,11 +119,11 @@
                 //With it, a suitable region of force has been tested to be applied for putting the Balls of that mass. It's around 0.002.
 
                 self.Ball.setTeam = function ( team ) {
-                    self.Ball.team = team | Crafty.BALL_TEAMS.NONE;
+                    self.Ball.team = team | Crafty.COURT.teams.NONE;
                     self.PhysicsSprite.setOverlay(shapeOverlays[self.Ball.team]);
                     return self;
                 };
-                self.Ball.setTeam(Crafty.BALL_TEAMS.NONE);
+                self.Ball.setTeam(Crafty.COURT.teams.NONE);
 
             }
         }

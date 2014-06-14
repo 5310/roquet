@@ -25,10 +25,10 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
-//    // Add gravity.
-//    world.add( Physics.behavior('constant-acceleration', {
-//        acc: { x : 0, y: 0.0001 } // this is the default
-//    }) );
+    // Add gravity.
+    world.add( Physics.behavior('constant-acceleration', {
+        acc: { x : 0, y: 0.0001 } // this is the default
+    }) );
 
     // Set integrator and drag.
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
@@ -71,34 +71,34 @@ var init = function() {
 
 
     /* Initialize the court. */
-    Crafty.COURT.init();
+    Crafty.COURT.init( [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX] );
 
 
 
     /* Add demo entities. */
 
     redBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
+        .Ball.setTeam(Crafty.COURT.teams.TRI)
         .Color2Set(Crafty.COLOR2_COLORS.RED)
         .PhysicsBodyPosition(100-50, 100);
     greenBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.STAR)
+        .Ball.setTeam(Crafty.COURT.teams.STAR)
         .Color2Set(Crafty.COLOR2_COLORS.GREEN)
         .PhysicsBodyPosition(100, 100);
     blueBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
+        .Ball.setTeam(Crafty.COURT.teams.HEX)
         .Color2Set(Crafty.COLOR2_COLORS.BLUE)
         .PhysicsBodyPosition(100+50, 100);
     yellowBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
+        .Ball.setTeam(Crafty.COURT.teams.TRI)
         .Color2Set(Crafty.COLOR2_COLORS.YELLOW)
         .PhysicsBodyPosition(100-50+20, 100+50);
     cyanBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.STAR)
+        .Ball.setTeam(Crafty.COURT.teams.STAR)
         .Color2Set(Crafty.COLOR2_COLORS.CYAN)
         .PhysicsBodyPosition(100+20, 100+50);
     magentaBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.BALL_TEAMS.HEX)
+        .Ball.setTeam(Crafty.COURT.teams.HEX)
         .Color2Set(Crafty.COLOR2_COLORS.MAGENTA)
         .PhysicsBodyPosition(100+50+20, 100+50);
 
