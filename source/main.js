@@ -15,6 +15,8 @@ var init = function() {
     ];
     Crafty.PIXIRENDERER.defaultContainer.filters = [color];
 
+
+
     /* Initialize physics. */
 
     // Initialize the base world.
@@ -67,11 +69,13 @@ var init = function() {
     });
 
 
+
     /* Initialize the court. */
     Crafty.COURT.init();
 
 
-    /* Add entities. */
+
+    /* Add demo entities. */
 
     redBall = Crafty.e("Thennable", "Ball")
         .Ball.setTeam(Crafty.BALL_TEAMS.TRI)
