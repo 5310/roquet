@@ -57,29 +57,28 @@
 - [ ]   Beta:
 
     - [ ]   Gameplay.
-        - [ ]   The Goal component.
-            - [ ]   Compose component with base components such as the attractor field.
-            - [ ]   Custom field to slow down bodies gradually and only trigger the goal event if slow enough and close to the center.
+        - [x]   The Goal component.
+            - [x]   Compose component with base components such as the attractor field.
+            - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
         - [ ]   The Court system.
-            - [ ]   Static obstacles generation and ball placement.
-            - [ ]   Turn engine.
-            - [ ]   Ball selection and shots.
+            - [ ]   Turn-engine.
+                - [ ]   Timed pausing bewteen turns.
+                - [ ]   Turn order and available putt tracking.
+                - [ ]   Time-scaling and zoom for dramatic moments?
+            - [x]   Ball selection and shots.
+                - [ ]   Ball validity check by turn order and available putts.
             - [ ]   Scoring.
-        - [ ]   Turn-engine.
-            - [ ]   Pausing, at least bewteen turns.
-            - [ ]   Time-scaling and slow-time for dramatic moments.
+            - [ ]   Data-driven level generation.
+                - [ ]   Obstacle and field generation.
+                - [ ]   Ball placement.
         - [ ]   More Field components.
             - [ ]   Conveyor
             - [ ]   Rotator
-            - [ ]   Overlay-based stextures for all these?
-    
-    - [ ]   Data-driven level generation.
-        - [ ]   Obstacle and field generation.
-         - [ ]   Ball placement.
+            - [ ]   Overlay-based stextures for all the fields.
     
     - [ ]   In-game interface.
-        - [ ]   Modals for turn-over.
-        - [ ]   Permanent overlays for turn-order and scoring.
+        - [ ]   Pause-screen overlays.
+        - [ ]   Putting visual feedback.
     
     - [ ]   Special effects.
         - [ ]   Sound effects for activities.
