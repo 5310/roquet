@@ -60,13 +60,15 @@
         - [x]   The Goal component.
             - [x]   Compose component with base components such as the attractor field.
             - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
+            - [ ]   Goal number overlay.
         - [ ]   The Court system.
-            - [ ]   Turn-engine.
-                - [ ]   Timed pausing bewteen turns.
-                - [ ]   Turn order and available putt tracking.
-                - [ ]   Time-scaling and zoom for dramatic moments?
+            - [x]   Turn-engine.
+                - [x]   Timed pausing bewteen turns.
+                - [x]   Turn order and available putt tracking.
+                - [ ]   Time-dilation for easing in and out of turns.
             - [x]   Ball selection and shots.
-                - [ ]   Ball validity check by turn order and available putts.
+                - [x]   Ball validity check by turn order.
+                - [ ]   Bonus putts.
             - [ ]   Scoring.
             - [ ]   Data-driven level generation.
                 - [ ]   Obstacle and field generation.
@@ -79,21 +81,15 @@
     - [ ]   In-game interface.
         - [ ]   Pause-screen overlays.
         - [ ]   Putting visual feedback.
+        - [ ]   Numeric overlays on active team's balls.
     
     - [ ]   Special effects.
+        - [ ]   Speed-trails of all the balls.
         - [ ]   Sound effects for activities.
         - [ ]   The Particle system for collision effects.
         - [ ]   Per-layer deformations for collision effects.
         
-    - [ ]   Menu screen.
-        - [ ]   Staring and quitting the game.
-        - [ ]   Court selection.
-        
-    - [ ]   Saving/loading.
-        - [ ]   Custom serialization system.
-            -   Assuming saving will only be done from paused state.
-        
-- [ ]   Pre-release:
+- [ ]   Pre-prototype-release:
 
     - [ ]   Design and write some interesting courts.
     
@@ -128,14 +124,22 @@
         - [ ]   Package for desktop.
             -   CocoonJS should suffice, and if not, try Node-wekbit.
 
-- [ ]   Release:
+- [ ]   Prototype Release:
 
     - [ ]   Write some modest "marketing" material.
     - [ ]   Publish to GH-pages.
     - [ ]   Publish to Itch.io
         - [ ]   Ask, or phrase, for donations; this isn't PWYW material, even if the minimum price is free.
     
-- [ ]   Post-release:
+- [ ]   Post-prototype-release:
+        
+    - [ ]   Menu screen.
+        - [ ]   Staring and quitting the game.
+        - [ ]   Court selection.
+        
+    - [ ]   Saving/loading.
+        - [ ]   Custom serialization system.
+            -   Assuming saving will only be done from paused state.
 
     - [ ]   Check feedback for bugs and changes worth implementing.
 
