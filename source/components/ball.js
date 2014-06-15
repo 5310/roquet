@@ -122,7 +122,7 @@
 
                 self.Ball.setTeam = function ( team ) {
                     self.Ball.team = team | Crafty.COURT.teams.NONE;
-                    self.PhysicsSprite.setOverlay(shapeOverlays[self.Ball.team]);
+                    self.PhysicsSprite.addOverlay(shapeOverlays[self.Ball.team]);
                     return self;
                 };
                 self.Ball.setTeam(Crafty.COURT.teams.NONE);

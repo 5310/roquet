@@ -11,7 +11,7 @@
 
                 self.PhysicsSprite = {};
 
-                self.PhysicsSprite.overlay = undefined;
+                self.PhysicsSprite.overlays = [];
 
                 self.PhysicsSprite.generateSprite = function() {
 
@@ -49,8 +49,11 @@
                     }
                     shape.endFill();
 
-                    if ( typeof self.PhysicsSprite.overlay === "function" ) {
-                        self.PhysicsSprite.overlay(shape, self);
+                    for ( var i = 1; i < self.PhysicsSprite.overlays.length; i++) {
+                        var overlay = self.PhysicsSprite.overlays[i];
+                        if ( typeof overlay === 'function') {
+                            overlay(shape, self);
+                        }
                     }
 
                     self.PixiSprite.setTexture(shape.generateTexture());
@@ -61,9 +64,16 @@
 
                 self.bind("PhysicsBodyAddition", self.PhysicsSprite.generateSprite);
 
-                self.PhysicsSprite.setOverlay = function(overlay) {
-                    self.PhysicsSprite.overlay = overlay;
+                self.PhysicsSprite.addOverlay = function(overlay) {
+                    self.PhysicsSprite.overlays.push(overlay);
                     self.PhysicsSprite.generateSprite();
+                    return self;
+                };
+
+                self.PhysicsSprite.removeOverlay = function(index) {
+                    self.PhysicsSprite.overlays.splice(index, 1);
+                    self.PhysicsSprite.generateSprite();
+                    return self;
                 };
 
                 self.bind("Color2Change", function () {
