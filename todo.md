@@ -65,7 +65,7 @@
             - [x]   Turn-engine.
                 - [x]   Timed pausing bewteen turns.
                 - [x]   Turn order and available putt tracking.
-                - [ ]   Time-dilation for easing in and out of turns.
+                - [x]   Time-dilation for easing in and out of turns.
             - [x]   Ball selection and shots.
                 - [x]   Ball validity check by turn order.
                 - [ ]   Bonus putts.

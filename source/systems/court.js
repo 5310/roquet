@@ -25,7 +25,7 @@
 
             init: function ( playingTeams ) {
 
-                Crafty.bind("PixiEnterFrame", Crafty.COURT._tick);
+                Crafty.bind("PhysicsStep", Crafty.COURT._step);
                 Crafty.bind("HammerDoubleTap", Crafty.COURT._doubleTap);
                 Crafty.bind("HammerHoldStart", Crafty.COURT._holdStart);
                 Crafty.bind("HammerHoldEnd", Crafty.COURT._holdEnd);
@@ -41,28 +41,38 @@
 
             },
 
-            _tick: function() {
-                if ( Crafty.COURT.paused ) {
-                    Crafty.PHYSICSSIMULATOR.paused = true; // Play physics.
-                    //TODO: Show the pause-overlay.
-                    //TODO: Update the pause-overlay.
+            _step: function(meta) {
+                Crafty.COURT._warp(); // Warp physics as per turn-time.
+                //TODO: Hide the pause-overlay.
+                if ( Crafty.COURT.turnTime <= 0 ) { // If turn timer has run dry.
+                    Crafty.COURT.turnTime = Crafty.COURT.turnLimit; // Reset timer.
+                    Crafty.COURT.turnTeamIndex++; Crafty.COURT.turnTeamIndex %= Crafty.COURT.playingTeams.length; // Increment team tracker.
+                    Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts = 1; // Reset team's available putt count.
+                    Crafty.PHYSICSSIMULATOR.world.pause(); // Pause again.
+                    console.log("Current teamIndex: "+Crafty.COURT.turnTeamIndex); //NOTE:
                 } else {
-                    Crafty.PHYSICSSIMULATOR.paused = false; // Pause physics.
-                    //TODO: Hide the pause-overlay.
-                    if ( Crafty.COURT.turnTime <= 0 ) { // If turn timer has run dry.
-                        Crafty.COURT.turnTime = Crafty.COURT.turnLimit; // Reset timer.
-                        Crafty.COURT.turnTeamIndex++; Crafty.COURT.turnTeamIndex %= Crafty.COURT.playingTeams.length; // Increment team tracker.
-                        Crafty.COURT.playingTeams.putts = 1; // Reset team's available putt count.
-                        Crafty.COURT.paused = true; // Pause again.
-                        console.log("Current teamIndex: "+Crafty.COURT.turnTeamIndex); //NOTE:
-                    } else {
-                        Crafty.COURT.turnTime--; // Reduce current turn's time.
-                    }
+                    Crafty.COURT.turnTime--; // Reduce current turn's time.
                 }
             },
 
+            _warp: function() {
+                var easePart = 10;
+                var invTime = Crafty.COURT.turnLimit - Crafty.COURT.turnTime;
+                var easeTime = Crafty.COURT.turnLimit/easePart;
+                var warp;
+                if (invTime <= easeTime) {
+                    warp = invTime/easeTime;
+                } else if (Crafty.COURT.turnTime <= easeTime) {
+                    warp = Crafty.COURT.turnTime/easeTime;
+                }
+                if (warp <= 0) {
+                    warp = 0.001;
+                }
+                Crafty.PHYSICSSIMULATOR.world.warp(warp);
+            },
+
             _doubleTap: function(data) {
-                Crafty.COURT.paused = !Crafty.COURT.paused;
+                Crafty.PHYSICSSIMULATOR.world.unpause();
             },
 
             _holdStart: function(data) {
@@ -110,8 +120,7 @@
                         force.normalize().mult((force.norm() > maxLength ? maxForce : maxForce*length/maxLength));
 
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
-                            console.log(Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts);
-                        Crafty.COURT.paused = false; // Unpause if putt valid.
+                        Crafty.PHYSICSSIMULATOR.world.unpause()// Unpause if putt valid.
                         Crafty.COURT._pullBall.PhysicsBody.applyForce(force); // Apply force.
 
                     } else { // Otherwise, see if there's a push.
@@ -139,8 +148,7 @@
 
 
                             Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
-                            console.log(Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts);
-                            Crafty.COURT.paused = false; // Unpause if putt valid.
+                            Crafty.PHYSICSSIMULATOR.world.unpause()// Unpause if putt valid.
                             pushBall.PhysicsBody.applyForce(force); // Apply force.
 
                         }
