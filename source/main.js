@@ -63,10 +63,10 @@ var init = function() {
         world.render();
     });
 
-    // Test for hit-test.
-    Crafty.bind("HammerTap", function(data) {
-        console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
-    });
+//    // Test for hit-test.
+//    Crafty.bind("HammerTap", function(data) {
+//        console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
+//    });
 
 
 
