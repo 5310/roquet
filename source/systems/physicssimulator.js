@@ -18,13 +18,15 @@
                 });
                 Physics.util.ticker.start();
 
+                Crafty.PHYSICSSIMULATOR.world.on('step', function(meta){
+                    Crafty.trigger("PhysicsStep", meta);
+                });
+
             },
 
             _tick: function (time) {
                 if (!Crafty.PHYSICSSIMULATOR.paused) {
-                    Crafty.trigger("PhysicsEnterFrame");
                     Crafty.PHYSICSSIMULATOR.world.step(time);
-                    Crafty.trigger("PhysicsExitFrame");
                 }
             },
 
