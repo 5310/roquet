@@ -21,6 +21,12 @@
                 Crafty.PHYSICSSIMULATOR.world.on('step', function(meta){
                     Crafty.trigger("PhysicsStep", meta);
                 });
+                Crafty.PHYSICSSIMULATOR.world.on('pause', function(){
+                    Crafty.trigger("PhysicsPause");
+                });
+                Crafty.PHYSICSSIMULATOR.world.on('unpause', function(){
+                    Crafty.trigger("PhysicsUnause");
+                });
 
             },
 
