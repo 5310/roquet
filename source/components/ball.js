@@ -97,7 +97,9 @@
                 self.Ball = {};
 
                 self.Ball._radius = 16;
+
                 self.Ball.team = 1;
+                self.Ball.nextGoal = 1; // Number of the next goal the ball should be go. <= 0 for done!
 
                 self.Ball._setRadius = function(radius) {
                     self.Ball.radius = radius;

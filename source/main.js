@@ -25,10 +25,10 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
-    // Add gravity.
-    world.add( Physics.behavior('constant-acceleration', {
-        acc: { x : 0, y: 0.0001 } // this is the default
-    }) );
+//    // Add gravity.
+//    world.add( Physics.behavior('constant-acceleration', {
+//        acc: { x : 0, y: 0.0001 } // this is the default
+//    }) );
 
     // Set integrator and drag.
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
@@ -71,7 +71,7 @@ var init = function() {
 
 
     /* Initialize the court. */
-    Crafty.COURT.init( [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX] );
+    Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
 
 
 
@@ -102,8 +102,16 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.MAGENTA)
         .PhysicsBodyPosition(100+50+20, 100+50);
 
-    attractor = Crafty.e("Thennable", "Goal")
-        .PhysicsBodyPosition(150, 240);
+    goal1 = Crafty.e("Thennable", "Goal")
+        .PhysicsBodyPosition(150, 240)
+        .then(function() {
+            this.PhysicsFieldAttractor.strength = 0.01;
+            this.PhysicsFieldAttractor.friction = 0.95;
+        });
+    goal2 = Crafty.e("Thennable", "Goal")
+        .PhysicsBodyPosition(700, 40);
+    goal3 = Crafty.e("Thennable", "Goal")
+        .PhysicsBodyPosition(650, 300);
 
     floor = Crafty.e("Thennable", "Obstacle")
         .PhysicsBodySet('convex-polygon', {

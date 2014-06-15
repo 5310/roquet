@@ -19,6 +19,8 @@
 
     };
 
+    var number = 1;
+
     Crafty.c(
         "Goal",
         {
@@ -32,6 +34,8 @@
 
                 self.Goal._radius = 24;
                 self.Goal._speedLimit = 0.001;
+
+                self.Goal.number = number++;
 
                 self.Goal._setRadius = function(radius) {
                     self.Goal.radius = radius;
