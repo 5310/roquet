@@ -70,9 +70,15 @@
                     return self;
                 };
 
-                self.PhysicsSprite.removeOverlay = function(index) {
-                    self.PhysicsSprite.overlays.splice(index, 1);
-                    self.PhysicsSprite.generateSprite();
+                self.PhysicsSprite.removeOverlay = function(overlay) {
+                    for (var i = self.PhysicsSprite.overlays.length-1; i >= 0; i--) {
+                        if (self.PhysicsSprite.overlays[i] == overlay) {
+                            overlay(shape, self);
+                            self.PhysicsSprite.overlays.splice(index, 1);
+                            self.PhysicsSprite.generateSprite();
+                            break;
+                        }
+                    }
                     return self;
                 };
 
