@@ -60,7 +60,7 @@
         - [x]   The Goal component.
             - [x]   Compose component with base components such as the attractor field.
             - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
-            - [ ]   Goal number overlay.
+            - [x]   Goal number overlay.
         - [ ]   The Court system.
             - [x]   Turn-engine.
                 - [x]   Timed pausing bewteen turns.
@@ -70,6 +70,8 @@
                 - [x]   Ball validity check by turn order.
                 - [ ]   Bonus putts.
             - [ ]   Scoring.
+                - [x]   Goaling.
+                - [ ]   Win conditions.
             - [ ]   Data-driven level generation.
                 - [ ]   Obstacle and field generation.
                 - [ ]   Ball placement.
@@ -81,17 +83,17 @@
     - [ ]   In-game interface.
         - [ ]   Pause-screen overlays.
         - [ ]   Putting visual feedback.
-        - [ ]   Numeric overlays on active team's balls.
+        - [x]   Numeric overlays on active team's balls.
+        
+- [ ]   Pre-prototype-release:
+
+    - [ ]   Design and write some interesting courts.
     
     - [ ]   Special effects.
         - [ ]   Speed-trails of all the balls.
         - [ ]   Sound effects for activities.
         - [ ]   The Particle system for collision effects.
         - [ ]   Per-layer deformations for collision effects.
-        
-- [ ]   Pre-prototype-release:
-
-    - [ ]   Design and write some interesting courts.
     
     - [ ]   Playtest.
         - [ ]   Force some people to play it.
