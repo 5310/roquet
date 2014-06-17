@@ -326,6 +326,7 @@
                     }
 
                     if ( !Crafty.COURT._pullBall ) { // Save pull coordinates if no valid target under cursor.
+                        Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                         Crafty.COURT._pushPoint.set(data.point.x, data.point.y);
                     }
 
@@ -379,7 +380,7 @@
 
 
                             Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
-                            Crafty.COURT.unpause(); // Unpause if putt valid.
+//                            Crafty.COURT.unpause(); // Pulls are unpaused when initiating as per design for balance.
                             pushBall.PhysicsBody.applyForce(force); // Apply force.
 
                         }
