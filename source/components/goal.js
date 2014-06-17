@@ -57,6 +57,10 @@
                 };
                 self.Goal._setPhysicsBody();
 
+                self.PhysicsSprite.addOverlay(function(shape, self) {
+                    Crafty.COURT.overlays.digit(shape, self, self.Goal._radius, self.Goal.number);
+                });
+
                 this.bind("PhysicsField", field.bind(this));
 
             }
