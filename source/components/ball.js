@@ -3,7 +3,8 @@
     var overlay = function(shape, self) {
         var radius = self.Ball._radius;
         var team = self.Ball.team;
-        if (!self.Ball.showNextGoalNumber) {
+        var nextGoal = self.Ball.nextGoal;
+        if (!self.Ball.showNextGoal) {
             switch (team) {
                 case 1:
                     Crafty.COURT.overlays.shapes.quad(shape, self, radius);
@@ -19,7 +20,7 @@
                     break;
             }
         } else {
-            //TODO: Draw the next goal number instead of shape.
+            Crafty.COURT.overlays.digit(shape, self, radius, nextGoal);
         }
     };
 
@@ -34,13 +35,27 @@
 
                 self.Ball = {};
 
-                self.Ball._radius = 16;
-
                 self.Ball.team = 0;
+                self.Ball.setTeam = function ( team ) {
+                    if ( team != self.Ball.team ) {
+                        self.Ball.team = team | Crafty.COURT.teams.NONE;
+                        self.PhysicsSprite.generateSprite();
+                    }
+                    return self;
+                };
+
                 self.Ball.nextGoal = 1; // Number of the next goal the ball should be go. <= 0 for done!
+                self.Ball.setNextGoal = function(goal) {
+                    self.Ball.nextGoal = goal;
+                    self.PhysicsSprite.generateSprite();
+                };
+                self.Ball.showNextGoal = false;
+                self.Ball.setShowGoal = function(flag) {
+                    self.Ball.showNextGoal = flag;
+                    self.PhysicsSprite.generateSprite();
+                };
 
-                self.Ball.showNextGoalNumber = false;
-
+                self.Ball._radius = 16;
                 self.Ball._setRadius = function(radius) {
                     if ( radius != self.Ball.radius ) {
                         self.Ball.radius = radius;
@@ -62,14 +77,6 @@
                 //NOTE: The above properties have been prelimianarily balanced to have the most suitable feel
                 //in terms of movement and collisions with default Obstacle entities.
                 //With it, a suitable region of force has been tested to be applied for putting the Balls of that mass. It's around 0.002.
-
-                self.Ball.setTeam = function ( team ) {
-                    if ( team != self.Ball.team ) {
-                        self.Ball.team = team | Crafty.COURT.teams.NONE;
-                        self.PhysicsSprite.generateSprite();
-                    }
-                    return self;
-                };
 
                 self.PhysicsSprite.addOverlay(overlay);
 

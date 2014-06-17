@@ -228,12 +228,31 @@
                 Crafty.COURT._warp(); // Warp physics as per turn-time.
                 //TODO: Hide the pause-overlay.
                 if ( Crafty.COURT.turnTime <= 0 ) { // If turn timer has run dry.
+
                     Crafty.bind('CourtTurnOver');
+
                     Crafty.COURT.turnTime = Crafty.COURT.turnLimit; // Reset timer.
+
                     Crafty.COURT.turnTeamIndex++; Crafty.COURT.turnTeamIndex %= Crafty.COURT.playingTeams.length; // Increment team tracker.
+
                     Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts = 1; // Reset team's available putt count.
+
+                    // Set goal numbers to show only for current team.
+                    var balls = Crafty("Ball");
+                    for (var i = 0; i < balls.length; i++) {
+                        var ball = Crafty(balls[i]);
+                        if ( ball.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
+                            ball.Ball.setShowGoal(true);
+                            ball.trigger("BallTeamTurn");
+                        } else {
+                            ball.Ball.setShowGoal(false);
+                        }
+                    }
+
                     Crafty.COURT.pause(); // Pause again.
+
                     console.log("Current teamIndex: "+Crafty.COURT.turnTeamIndex); //NOTE:
+
                 } else {
                     Crafty.COURT.turnTime--; // Reduce current turn's time.
                 }
@@ -260,15 +279,14 @@
                 var ball = data.entity;
                 var goal = data.goal;
 
-                console.log("next goal: "+ball.Ball.nextGoal+
+                if (ball.Ball.nextGoal == goal.Goal.number) {
+                    console.log('GOAL!'); //NOTE:
+                    console.log("next goal: "+ball.Ball.nextGoal+
                             " current goal: "+goal.Goal.number+
                             " own team: "+ball.Ball.team+
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
-
-                if (ball.Ball.nextGoal == goal.Goal.number) {
-                    console.log('GOAL!'); //NOTE:
                     Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score++;
-                    ball.Ball.nextGoal++;
+                    ball.Ball.setNextGoal(++ball.Ball.nextGoal);
                     if (Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >= Crafty.COURT.scoreTarget) {
                         console.log('WIN!'); //NOTE:
                         //TODO: Victory routine.
