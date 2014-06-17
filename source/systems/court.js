@@ -98,6 +98,83 @@
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
                         shape.endFill();
                     }
+                },
+                digit: function (shape, self, radius, number) {
+                    var radius = radius ? radius : 10;
+                    var number = number !== undefined ? Math.floor(number) : 0;
+                    shape.beginFill(0x000000);
+                    switch (number) {
+                        case 0:
+                            shape.beginFill(0x000000, 0);
+                            shape.lineStyle(radius*0.15, 0x000000);
+                            shape.drawCircle( 0,  0, radius*0.5);
+                            break;
+                        case 1:
+                            shape.drawCircle( 0,  0, radius*0.4);
+                            break;
+                        case 2:
+                            shape.drawCircle(-5,  0, radius*0.25);
+                            shape.drawCircle( 5,  0, radius*0.25);
+                            break;
+                        case 3:
+                            shape.drawCircle( 0, -9, radius*0.25);
+                            shape.drawCircle( 0,  0, radius*0.25);
+                            shape.drawCircle( 0,  9, radius*0.25);
+                            break;
+                        case 4:
+                            shape.drawCircle(-7, 0, radius*0.25);
+                            shape.drawCircle( 7,  0, radius*0.25);
+                            shape.drawCircle( 0, -7, radius*0.25);
+                            shape.drawCircle( 0,  7, radius*0.25);
+                            break;
+                        case 5:
+                            shape.drawCircle(-9,  0, radius*0.25);
+                            shape.drawCircle( 0, -9, radius*0.25);
+                            shape.drawCircle( 0,  0, radius*0.25);
+                            shape.drawCircle( 0,  9, radius*0.25);
+                            shape.drawCircle( 9,  0, radius*0.25);
+                            break;
+                        case 6:
+                            shape.drawCircle(-7, -2, radius*0.2);
+                            shape.drawCircle( 0, -4, radius*0.2);
+                            shape.drawCircle( 7, -6, radius*0.2);
+                            shape.drawCircle(-7,  6, radius*0.2);
+                            shape.drawCircle( 0,  4, radius*0.2);
+                            shape.drawCircle( 7,  2, radius*0.2);
+                            break;
+                        case 7:
+                            shape.drawCircle(  0,   0, radius*0.2);
+                            shape.drawCircle( -7,  0, radius*0.2);
+                            shape.drawCircle(  7,  0, radius*0.2);
+                            shape.drawCircle( -3.5,  -6.5, radius*0.2);
+                            shape.drawCircle(  3.5,  -6.5, radius*0.2);
+                            shape.drawCircle( -3.5,  6.5, radius*0.2);
+                            shape.drawCircle(  3.5,  6.5, radius*0.2);
+                            break;
+                        case 8:
+                            shape.drawCircle( -7,  -7, radius*0.2);
+                            shape.drawCircle(  0,  -7, radius*0.2);
+                            shape.drawCircle(  7,  -7, radius*0.2);
+                            shape.drawCircle( -7,   0, radius*0.2);
+                            shape.drawCircle(  7,   0, radius*0.2);
+                            shape.drawCircle( -7,   7, radius*0.2);
+                            shape.drawCircle(  0,   7, radius*0.2);
+                            shape.drawCircle(  7,   7, radius*0.2);
+                            break;
+                        case 9:
+                            shape.drawCircle(11,   0, radius*0.15);
+                            shape.drawCircle(6,   -6, radius*0.2);
+                            shape.drawCircle( 0,  -11, radius*0.15);
+                            shape.drawCircle( -6,  -6, radius*0.2);
+                            shape.drawCircle(  0,   0, radius*0.25);
+                            shape.drawCircle(  6,   6, radius*0.2);
+                            shape.drawCircle(-11,   0, radius*0.15);
+                            shape.drawCircle(-6, 6, radius*0.2);
+                            shape.drawCircle( 0,  11, radius*0.15);
+                            break;
+                    }
+
+                    shape.endFill();
                 }
             },
 
