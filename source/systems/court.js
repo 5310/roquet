@@ -205,17 +205,23 @@
                 Crafty.bind("HammerHoldEnd", Crafty.COURT._holdEnd);
 
                 //TODO: Initialize all the court entities: balls, obstacles, goals.
+                var numGoals = Crafty("Goal").length;
+                var balls = Crafty("Ball");
+                for (var i = 0; i < balls.length; i++ ) {
+                    var ball = Crafty(balls[i]);
+                    ball.Ball.nextGoal = numGoals;
+                }
 
                 // Set-up playing teams' states.
                 for ( var i in data.playingTeams ) {
                     Crafty.COURT.playingTeams[i] = {
                         team: data.playingTeams[i],
                         putts: 1,
-                        score: 0
+                        score: 0,
                     };
                 }
 
-                //TODO: Calculate target score from number of balls and goals.
+                //TODO: Calculate target score from number of balls and goals. Is this for every team?
 
             },
 
@@ -293,7 +299,7 @@
                             " own team: "+ball.Ball.team+
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
                     Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score++;
-                    ball.Ball.setNextGoal(++ball.Ball.nextGoal);
+                    ball.Ball.setNextGoal(--ball.Ball.nextGoal);
                     if (Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >= Crafty.COURT.scoreTarget) {
                         console.log('WIN!'); //NOTE:
                         //TODO: Victory routine.

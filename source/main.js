@@ -66,12 +66,6 @@ var init = function() {
 //    // Test for hit-test.
 //    Crafty.bind("HammerTap", function(data) {
 //        console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
-//    });
-
-
-
-    /* Initialize the court. */
-    Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
 
 
 
@@ -133,6 +127,12 @@ var init = function() {
 //                { x: 400, y: -30 },
             ]
         });
+//    });
+
+
+
+    /* Initialize the court. */
+    Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
 
 };
 
