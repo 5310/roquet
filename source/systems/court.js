@@ -101,7 +101,7 @@
                 },
                 digit: function (shape, self, radius, number) {
                     var radius = radius ? radius : 10;
-                    var number = number !== undefined ? Math.floor(number) : 10;
+                    var number = number !== undefined ? Math.floor(number) : -1;
                     shape.beginFill(0x000000);
                     var normalizer = radius/16; // Because I designed them for 16px radius and don't want to use messy fractions because of readability.
                     switch (number) {
