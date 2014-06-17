@@ -12,10 +12,34 @@
                 self.PhysicsSprite = {};
 
                 self.PhysicsSprite.overlays = [];
+                self.PhysicsSprite.addOverlay = function(overlay, redraw) {
+                    var redraw = redraw === undefined ? true : redraw;
+                    self.PhysicsSprite.overlays.push(overlay);
+                    if (redraw) self.PhysicsSprite.generateSprite();
+                    return self;
+                };
+                self.PhysicsSprite.removeOverlay = function(overlay, redraw) {
+                    var redraw = redraw === undefined ? true : redraw;
+                    for (var i = self.PhysicsSprite.overlays.length-1; i >= 0; i--) {
+                        if (self.PhysicsSprite.overlays[i] == overlay) {
+                            self.PhysicsSprite.overlays.splice(i, 1);
+                            if (redraw) self.PhysicsSprite.generateSprite();
+                            break;
+                        }
+                    }
+                    return self;
+                };
 
+                self.PhysicsSprite._shape;
                 self.PhysicsSprite.generateSprite = function() {
 
-                    var shape = new PIXI.Graphics();
+                    var shape;
+                    if (self.PhysicsSprite._shape) {
+                        shape = self.PhysicsSprite._shape;
+                    } else {
+                        shape = new PIXI.Graphics();
+                    }
+                    shape.clear();
                     shape.boundsPadding = 0;
                     shape.beginFill(0xFFFFFF);
                     switch (self.PhysicsBody.name) {
@@ -49,7 +73,7 @@
                     }
                     shape.endFill();
 
-                    for ( var i = 1; i < self.PhysicsSprite.overlays.length; i++) {
+                    for ( var i = 0; i < self.PhysicsSprite.overlays.length; i++) {
                         var overlay = self.PhysicsSprite.overlays[i];
                         if ( typeof overlay === 'function') {
                             overlay(shape, self);
@@ -63,24 +87,6 @@
                 };
 
                 self.bind("PhysicsBodyAddition", self.PhysicsSprite.generateSprite);
-
-                self.PhysicsSprite.addOverlay = function(overlay) {
-                    self.PhysicsSprite.overlays.push(overlay);
-                    self.PhysicsSprite.generateSprite();
-                    return self;
-                };
-
-                self.PhysicsSprite.removeOverlay = function(overlay) {
-                    for (var i = self.PhysicsSprite.overlays.length-1; i >= 0; i--) {
-                        if (self.PhysicsSprite.overlays[i] == overlay) {
-                            overlay(shape, self);
-                            self.PhysicsSprite.overlays.splice(index, 1);
-                            self.PhysicsSprite.generateSprite();
-                            break;
-                        }
-                    }
-                    return self;
-                };
 
                 self.bind("Color2Change", function () {
                     self.PixiSprite.tint = self.Color2;
