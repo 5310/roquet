@@ -18,85 +18,87 @@
             },
             playingTeams: [],
 
-            shapes: {
-                QUAD: function(shape, self, radius) {
-                    var radius = radius ? radius : 10;
-                    shape.beginFill(0x000000);
-                    var squareWidth = radius;
-                    shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
-                    shape.endFill();
-                },  // Quad
-                TRI: function(shape, self, radius) {
-                    var radius = radius ? radius : 10;
-                    shape.beginFill(0x000000);
-                    var triSpoke = radius*0.8;
-                    shape.moveTo(0, -triSpoke);
-                    shape.lineTo(
-                        Math.cos(Math.PI/6)*triSpoke,
-                        Math.sin(Math.PI/6)*triSpoke
-                    );
-                    shape.lineTo(
-                        -Math.cos(Math.PI/6)*triSpoke,
-                        Math.sin(Math.PI/6)*triSpoke
-                    );
-                    shape.endFill();
-                },  // Tri
-                STAR: function(shape, self, radius) {
-                    var radius = radius ? radius : 10;
-                    shape.beginFill(0x000000);
-                    var starSpoke = radius*0.75;
-                    var starCrease = 0.6;
-                    shape.moveTo(0, -starSpoke);
-                    shape.lineTo(
-                        Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
-                        -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
-                    );
-                    shape.lineTo(
-                        Math.cos(Crafty.math.degToRad(18))*starSpoke,
-                        -Math.sin(Crafty.math.degToRad(18))*starSpoke
-                    );
-                    shape.lineTo(
-                        Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
-                        Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
-                    );
-                    shape.lineTo(
-                        Math.cos(Crafty.math.degToRad(54))*starSpoke,
-                        Math.sin(Crafty.math.degToRad(54))*starSpoke
-                    );
-                    shape.lineTo(
-                        0,
-                        starSpoke*starCrease
-                    );
-                    shape.lineTo(
-                        -Math.cos(Crafty.math.degToRad(54))*starSpoke,
-                        Math.sin(Crafty.math.degToRad(54))*starSpoke
-                    );
-                    shape.lineTo(
-                        -Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
-                        Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
-                    );
-                    shape.lineTo(
-                        -Math.cos(Crafty.math.degToRad(18))*starSpoke,
-                        -Math.sin(Crafty.math.degToRad(18))*starSpoke
-                    );
-                    shape.lineTo(
-                        -Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
-                        -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
-                    );
-                    shape.endFill();
-                },  // Start
-                HEX: function(shape, self, radius) {
-                    var radius = radius ? radius : 10;
-                    shape.beginFill(0x000000);
-                    var hexSpoke = radius*0.7;
-                    shape.moveTo(0, -hexSpoke);
-                    shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                    shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                    shape.lineTo(0, hexSpoke);
-                    shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                    shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                    shape.endFill();
-                }   // Hex
+            overlays: {
+                shapes: {
+                    QUAD: function(shape, self, radius) {
+                        var radius = radius ? radius : 10;
+                        shape.beginFill(0x000000);
+                        var squareWidth = radius;
+                        shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
+                        shape.endFill();
+                    },
+                    TRI: function(shape, self, radius) {
+                        var radius = radius ? radius : 10;
+                        shape.beginFill(0x000000);
+                        var triSpoke = radius*0.8;
+                        shape.moveTo(0, -triSpoke);
+                        shape.lineTo(
+                            Math.cos(Math.PI/6)*triSpoke,
+                            Math.sin(Math.PI/6)*triSpoke
+                        );
+                        shape.lineTo(
+                            -Math.cos(Math.PI/6)*triSpoke,
+                            Math.sin(Math.PI/6)*triSpoke
+                        );
+                        shape.endFill();
+                    },
+                    STAR: function(shape, self, radius) {
+                        var radius = radius ? radius : 10;
+                        shape.beginFill(0x000000);
+                        var starSpoke = radius*0.75;
+                        var starCrease = 0.6;
+                        shape.moveTo(0, -starSpoke);
+                        shape.lineTo(
+                            Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
+                            -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
+                        );
+                        shape.lineTo(
+                            Math.cos(Crafty.math.degToRad(18))*starSpoke,
+                            -Math.sin(Crafty.math.degToRad(18))*starSpoke
+                        );
+                        shape.lineTo(
+                            Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
+                            Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
+                        );
+                        shape.lineTo(
+                            Math.cos(Crafty.math.degToRad(54))*starSpoke,
+                            Math.sin(Crafty.math.degToRad(54))*starSpoke
+                        );
+                        shape.lineTo(
+                            0,
+                            starSpoke*starCrease
+                        );
+                        shape.lineTo(
+                            -Math.cos(Crafty.math.degToRad(54))*starSpoke,
+                            Math.sin(Crafty.math.degToRad(54))*starSpoke
+                        );
+                        shape.lineTo(
+                            -Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
+                            Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
+                        );
+                        shape.lineTo(
+                            -Math.cos(Crafty.math.degToRad(18))*starSpoke,
+                            -Math.sin(Crafty.math.degToRad(18))*starSpoke
+                        );
+                        shape.lineTo(
+                            -Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
+                            -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
+                        );
+                        shape.endFill();
+                    },
+                    HEX: function(shape, self, radius) {
+                        var radius = radius ? radius : 10;
+                        shape.beginFill(0x000000);
+                        var hexSpoke = radius*0.7;
+                        shape.moveTo(0, -hexSpoke);
+                        shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(0, hexSpoke);
+                        shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
+                        shape.endFill();
+                    }
+                }
             },
 
             scoreTarget: 6,
