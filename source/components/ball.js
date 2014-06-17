@@ -1,27 +1,27 @@
 (function () {
 
-    // Base radius.
-    var radius = 16;
-
-    // Array of shape overlay routines.
-    var shapeOverlays = [];
-    shapeOverlays[Crafty.COURT.teams.QUAD] = function(shape, self) {
+    var overlay = function(shape, self) {
         var radius = self.Ball._radius;
-        Crafty.COURT.shapes.QUAD(shape, self, radius);
+        var team = self.Ball.team;
+        if (!self.Ball.showNextGoalNumber) {
+            switch (team) {
+                case 1:
+                    Crafty.COURT.shapes.QUAD(shape, self, radius);
+                    break;
+                case 2:
+                    Crafty.COURT.shapes.TRI(shape, self, radius);
+                    break;
+                case 3:
+                    Crafty.COURT.shapes.STAR(shape, self, radius);
+                    break;
+                case 4:
+                    Crafty.COURT.shapes.HEX(shape, self, radius);
+                    break;
+            }
+        } else {
+            //TODO: Draw the next goal number instead of shape.
+        }
     };
-    shapeOverlays[Crafty.COURT.teams.TRI] = function(shape, self) {
-        var radius = self.Ball._radius;
-        Crafty.COURT.shapes.TRI(shape, self, radius);
-    };
-    shapeOverlays[Crafty.COURT.teams.STAR] = function(shape, self) {
-        var radius = self.Ball._radius;
-        Crafty.COURT.shapes.STAR(shape, self, radius);
-    };
-    shapeOverlays[Crafty.COURT.teams.HEX] = function(shape, self) {
-        var radius = self.Ball._radius;
-        Crafty.COURT.shapes.HEX(shape, self, radius);
-    };
-
 
     Crafty.c(
         "Ball",
@@ -36,14 +36,18 @@
 
                 self.Ball._radius = 16;
 
-                self.Ball.team = 1;
+                self.Ball.team = 0;
                 self.Ball.nextGoal = 1; // Number of the next goal the ball should be go. <= 0 for done!
 
+                self.Ball.showNextGoalNumber = false;
+
                 self.Ball._setRadius = function(radius) {
-                    self.Ball.radius = radius;
-                    //TODO: Change body in-place, keeping all of state.
-                    self.Ball._setPhysicsBody();
-                    self.PhysicsSprite.generateSprite();
+                    if ( radius != self.Ball.radius ) {
+                        self.Ball.radius = radius;
+                        //TODO: Change body in-place, keeping all of state.
+                        self.Ball._setPhysicsBody();
+                        self.PhysicsSprite.generateSprite();
+                    }
                     return self;
                 };
 
@@ -61,15 +65,13 @@
 
                 self.Ball.setTeam = function ( team ) {
                     if ( team != self.Ball.team ) {
-                        self.PhysicsSprite.removeOverlay(shapeOverlays[self.Ball.team], false);
-                        self.PhysicsSprite.overlays.pop();
                         self.Ball.team = team | Crafty.COURT.teams.NONE;
-                        self.PhysicsSprite.addOverlay(shapeOverlays[self.Ball.team], false);
                         self.PhysicsSprite.generateSprite();
                     }
                     return self;
                 };
-                self.Ball.setTeam(Crafty.COURT.teams.NONE);
+
+                self.PhysicsSprite.addOverlay(overlay);
 
             }
         }
