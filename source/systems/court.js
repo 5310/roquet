@@ -101,8 +101,9 @@
                 },
                 digit: function (shape, self, radius, number) {
                     var radius = radius ? radius : 10;
-                    var number = number !== undefined ? Math.floor(number) : 0;
+                    var number = number !== undefined ? Math.floor(number) : 10;
                     shape.beginFill(0x000000);
+                    var normalizer = radius/16; // Because I designed them for 16px radius and don't want to use messy fractions because of readability.
                     switch (number) {
                         case 0:
                             shape.beginFill(0x000000, 0);
@@ -113,64 +114,70 @@
                             shape.drawCircle( 0,  0, radius*0.4);
                             break;
                         case 2:
-                            shape.drawCircle(-5,  0, radius*0.25);
-                            shape.drawCircle( 5,  0, radius*0.25);
+                            shape.drawCircle(-6*normalizer,  0, radius*0.3);
+                            shape.drawCircle( 6*normalizer,  0, radius*0.3);
                             break;
                         case 3:
-                            shape.drawCircle( 0, -9, radius*0.25);
+                            shape.drawCircle( 0, -9*normalizer, radius*0.25);
                             shape.drawCircle( 0,  0, radius*0.25);
-                            shape.drawCircle( 0,  9, radius*0.25);
+                            shape.drawCircle( 0,  9*normalizer, radius*0.25);
                             break;
                         case 4:
-                            shape.drawCircle(-7, 0, radius*0.25);
-                            shape.drawCircle( 7,  0, radius*0.25);
-                            shape.drawCircle( 0, -7, radius*0.25);
-                            shape.drawCircle( 0,  7, radius*0.25);
+                            shape.drawCircle(-7*normalizer, 0, radius*0.25);
+                            shape.drawCircle( 7*normalizer,  0, radius*0.25);
+                            shape.drawCircle( 0, -7*normalizer, radius*0.25);
+                            shape.drawCircle( 0,  7*normalizer, radius*0.25);
                             break;
                         case 5:
-                            shape.drawCircle(-9,  0, radius*0.25);
-                            shape.drawCircle( 0, -9, radius*0.25);
+                            shape.drawCircle(-9*normalizer,  0, radius*0.25);
+                            shape.drawCircle( 0, -9*normalizer, radius*0.25);
                             shape.drawCircle( 0,  0, radius*0.25);
-                            shape.drawCircle( 0,  9, radius*0.25);
-                            shape.drawCircle( 9,  0, radius*0.25);
+                            shape.drawCircle( 0,  9*normalizer, radius*0.25);
+                            shape.drawCircle( 9*normalizer,  0, radius*0.25);
                             break;
                         case 6:
-                            shape.drawCircle(-7, -2, radius*0.2);
-                            shape.drawCircle( 0, -4, radius*0.2);
-                            shape.drawCircle( 7, -6, radius*0.2);
-                            shape.drawCircle(-7,  6, radius*0.2);
-                            shape.drawCircle( 0,  4, radius*0.2);
-                            shape.drawCircle( 7,  2, radius*0.2);
+                            shape.drawCircle(-7*normalizer, -2*normalizer, radius*0.2);
+                            shape.drawCircle( 0, -4*normalizer, radius*0.2);
+                            shape.drawCircle( 7*normalizer, -6*normalizer, radius*0.2);
+                            shape.drawCircle(-7*normalizer,  6, radius*0.2);
+                            shape.drawCircle( 0,  4*normalizer, radius*0.2);
+                            shape.drawCircle( 7*normalizer,  2*normalizer, radius*0.2);
                             break;
                         case 7:
                             shape.drawCircle(  0,   0, radius*0.2);
-                            shape.drawCircle( -7,  0, radius*0.2);
-                            shape.drawCircle(  7,  0, radius*0.2);
-                            shape.drawCircle( -3.5,  -6.5, radius*0.2);
-                            shape.drawCircle(  3.5,  -6.5, radius*0.2);
-                            shape.drawCircle( -3.5,  6.5, radius*0.2);
-                            shape.drawCircle(  3.5,  6.5, radius*0.2);
+                            shape.drawCircle( -7*normalizer,  0, radius*0.2);
+                            shape.drawCircle(  7*normalizer,  0, radius*0.2);
+                            shape.drawCircle( -3.5*normalizer,  -6.5*normalizer, radius*0.2);
+                            shape.drawCircle(  3.5*normalizer,  -6.5*normalizer, radius*0.2);
+                            shape.drawCircle( -3.5*normalizer,  6.5*normalizer, radius*0.2);
+                            shape.drawCircle(  3.5*normalizer,  6.5*normalizer, radius*0.2);
                             break;
                         case 8:
-                            shape.drawCircle( -7,  -7, radius*0.2);
-                            shape.drawCircle(  0,  -7, radius*0.2);
-                            shape.drawCircle(  7,  -7, radius*0.2);
-                            shape.drawCircle( -7,   0, radius*0.2);
-                            shape.drawCircle(  7,   0, radius*0.2);
-                            shape.drawCircle( -7,   7, radius*0.2);
-                            shape.drawCircle(  0,   7, radius*0.2);
-                            shape.drawCircle(  7,   7, radius*0.2);
+                            shape.drawCircle( -7*normalizer,  -7*normalizer, radius*0.2);
+                            shape.drawCircle(  0,  -7*normalizer, radius*0.2);
+                            shape.drawCircle(  7*normalizer,  -7*normalizer, radius*0.2);
+                            shape.drawCircle( -7*normalizer,   0, radius*0.2);
+                            shape.drawCircle(  7*normalizer,   0, radius*0.2);
+                            shape.drawCircle( -7*normalizer,   7*normalizer, radius*0.2);
+                            shape.drawCircle(  0,   7*normalizer, radius*0.2);
+                            shape.drawCircle(  7*normalizer,   7*normalizer, radius*0.2);
                             break;
                         case 9:
-                            shape.drawCircle(11,   0, radius*0.15);
-                            shape.drawCircle(6,   -6, radius*0.2);
-                            shape.drawCircle( 0,  -11, radius*0.15);
-                            shape.drawCircle( -6,  -6, radius*0.2);
+                            shape.drawCircle(11*normalizer,   0, radius*0.15);
+                            shape.drawCircle(6*normalizer,   -6*normalizer, radius*0.2);
+                            shape.drawCircle( 0,  -11*normalizer, radius*0.15);
+                            shape.drawCircle( -6*normalizer,  -6*normalizer, radius*0.2);
                             shape.drawCircle(  0,   0, radius*0.25);
-                            shape.drawCircle(  6,   6, radius*0.2);
-                            shape.drawCircle(-11,   0, radius*0.15);
-                            shape.drawCircle(-6, 6, radius*0.2);
-                            shape.drawCircle( 0,  11, radius*0.15);
+                            shape.drawCircle(  6*normalizer,   6*normalizer, radius*0.2);
+                            shape.drawCircle(-11*normalizer,   0, radius*0.15);
+                            shape.drawCircle(-6*normalizer, 6*normalizer, radius*0.2);
+                            shape.drawCircle( 0,  11*normalizer, radius*0.15);
+                            break;
+                        default:
+                            shape.drawRect(-radius*0.15/2 -4, -radius*1.5/2, radius*0.15, radius*1.5);
+                            shape.drawRect(-radius*0.15/2 +4, -radius*1.5/2, radius*0.15, radius*1.5);
+                            shape.drawRect(-radius*1.5/2, -radius*0.15/2 -4, radius*1.5, radius*0.15);
+                            shape.drawRect(-radius*1.5/2, -radius*0.15/2 +4, radius*1.5, radius*0.15);
                             break;
                     }
 
