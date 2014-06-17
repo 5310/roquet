@@ -20,14 +20,14 @@
 
             overlays: {
                 shapes: {
-                    QUAD: function(shape, self, radius) {
+                    quad: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
                         shape.beginFill(0x000000);
                         var squareWidth = radius;
                         shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
                         shape.endFill();
                     },
-                    TRI: function(shape, self, radius) {
+                    tri: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
                         shape.beginFill(0x000000);
                         var triSpoke = radius*0.8;
@@ -42,7 +42,7 @@
                         );
                         shape.endFill();
                     },
-                    STAR: function(shape, self, radius) {
+                    star: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
                         shape.beginFill(0x000000);
                         var starSpoke = radius*0.75;
@@ -86,7 +86,7 @@
                         );
                         shape.endFill();
                     },
-                    HEX: function(shape, self, radius) {
+                    hex: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
                         shape.beginFill(0x000000);
                         var hexSpoke = radius*0.7;

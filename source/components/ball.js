@@ -6,16 +6,16 @@
         if (!self.Ball.showNextGoalNumber) {
             switch (team) {
                 case 1:
-                    Crafty.COURT.overlays.shapes.QUAD(shape, self, radius);
+                    Crafty.COURT.overlays.shapes.quad(shape, self, radius);
                     break;
                 case 2:
-                    Crafty.COURT.overlays.shapes.TRI(shape, self, radius);
+                    Crafty.COURT.overlays.shapes.tri(shape, self, radius);
                     break;
                 case 3:
-                    Crafty.COURT.overlays.shapes.STAR(shape, self, radius);
+                    Crafty.COURT.overlays.shapes.star(shape, self, radius);
                     break;
                 case 4:
-                    Crafty.COURT.overlays.shapes.HEX(shape, self, radius);
+                    Crafty.COURT.overlays.shapes.hex(shape, self, radius);
                     break;
             }
         } else {
