@@ -100,7 +100,7 @@ var init = function() {
         .PhysicsBodyPosition(300, 300)
         .then(function() {
             var overlay = function(shape, self) {
-                Crafty.COURT.overlays.digit(shape, self, 16);
+                Crafty.COURT.graphicRoutines.digit(shape, self, 16);
             }
             this.PhysicsSprite.addOverlay( overlay );
         });

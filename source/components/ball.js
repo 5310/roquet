@@ -7,20 +7,20 @@
         if (!self.Ball.showNextGoal) {
             switch (team) {
                 case 1:
-                    Crafty.COURT.overlays.shapes.quad(shape, self, radius);
+                    Crafty.COURT.graphicRoutines.shapes.quad(shape, self, radius);
                     break;
                 case 2:
-                    Crafty.COURT.overlays.shapes.tri(shape, self, radius);
+                    Crafty.COURT.graphicRoutines.shapes.tri(shape, self, radius);
                     break;
                 case 3:
-                    Crafty.COURT.overlays.shapes.star(shape, self, radius);
+                    Crafty.COURT.graphicRoutines.shapes.star(shape, self, radius);
                     break;
                 case 4:
-                    Crafty.COURT.overlays.shapes.hex(shape, self, radius);
+                    Crafty.COURT.graphicRoutines.shapes.hex(shape, self, radius);
                     break;
             }
         } else {
-            Crafty.COURT.overlays.digit(shape, self, radius, nextGoal);
+            Crafty.COURT.graphicRoutines.digit(shape, self, radius, nextGoal);
         }
     };
 

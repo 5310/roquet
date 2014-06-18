@@ -18,7 +18,7 @@
             },
             playingTeams: [],
 
-            overlays: {
+            graphicRoutines: {
                 shapes: {
                     quad: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
