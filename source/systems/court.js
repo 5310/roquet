@@ -182,6 +182,78 @@
                 }
             },
 
+            _effectsContainer: undefined,
+            _waveLimit: 10,
+            _waveBuffer: [],
+            _waveCounter: 0,
+            _initWave: function() {
+                for ( var i = 0; i < Crafty.COURT._waveLimit; i++) {
+                    var wave = new PIXI.Graphics();
+                    wave.age = 1;
+                    wave.id = i;
+                    wave.visibility = false;
+                    Crafty.COURT._effectsContainer.addChild(wave);
+                    Crafty.COURT._waveBuffer.push(wave);
+                }
+            },
+            _updateWave: function() {
+                var aging = 0.05;
+                for ( var i = 0; i < Crafty.COURT._waveBuffer.length; i++ ) {
+                    var wave = Crafty.COURT._waveBuffer[i];
+                    if ( wave.age >= 1 ) {
+                        wave.visibility = false;
+                    } else {
+                        wave.age += aging;
+                        var scale = (1-Math.pow(1-wave.age, 2));
+                        wave.scale.x = 1+scale*5;
+                        wave.scale.y = 1+scale*5;
+                        wave.alpha = (1-Math.pow(wave.age, 1.5));
+                    }
+                }
+            },
+            makeWave: function(x, y, r, team) {
+
+                var wave = Crafty.COURT._waveBuffer[Crafty.COURT._waveCounter];
+                Crafty.COURT._waveCounter++; Crafty.COURT._waveCounter %= Crafty.COURT._waveLimit;
+
+                var x = x !== undefined ? x : 0;
+                var y = y !== undefined ? y : 0;
+                var r = r !== undefined ? r : 0;
+                var team = team !== undefined ? team : 0;
+
+                wave.clear();
+                wave.beginFill(0x111111, 0);
+                wave.lineStyle(2, 0x111111, 0.75);
+                    switch (team) {
+                        case 0:
+                            wave.drawCircle(0, 0, 16);
+                            break;
+                        case 1:
+                            Crafty.COURT.graphicRoutines.shapes.quad(wave, wave, 16);
+                            break;
+                        case 2:
+                            Crafty.COURT.graphicRoutines.shapes.tri(wave, wave, 16);
+                            break;
+                        case 3:
+                            Crafty.COURT.graphicRoutines.shapes.star(wave, wave, 16);
+                            break;
+                        case 4:
+                            Crafty.COURT.graphicRoutines.shapes.hex(wave, wave, 16);
+                            break;
+                    }
+                wave.endFill();
+                wave.position.x = x; wave.position.y = y;
+                wave.rotation = r;
+
+                wave.visibility = true;
+                wave.age = 0;
+
+                console.log(Crafty.COURT._waveCounter);
+
+                return wave;
+
+            },
+
             scoreTarget: 6,
 
             paused: false,
@@ -219,6 +291,16 @@
                 }
 
                 //TODO: Calculate target score from number of balls and goals. Is this for every team?
+
+                // Set-up effects and interface layers.
+
+                // Create effects container Pixi layer.
+                Crafty.COURT._effectsContainer = new PIXI.DisplayObjectContainer();
+                Crafty.PIXIRENDERER.stage.addChild(Crafty.COURT._effectsContainer);wave = new PIXI.Graphics();
+
+                // Set up wave effects.
+                Crafty.COURT._initWave();
+                Crafty.bind("PixiEnterFrame", Crafty.COURT._updateWave);
 
             },
 
@@ -310,6 +392,8 @@
             },
 
             _holdStart: function(data) {
+
+                Crafty.COURT.makeWave(data.point.x, data.point.y);
 
                 // Check if current team has any putts left at all before working.
                 if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 ) {
