@@ -509,6 +509,25 @@
                         );
                         Crafty.COURT._puttLine.visible = true;
                     } else {
+
+                        var color = Crafty.COLOR2_COLORS.LGRAY;
+
+                        var bodies = Crafty.PHYSICSSIMULATOR.hitTest(data.point);
+                        var pushBall;
+                        for (var i = 0; i < bodies.length; i++ ) {
+                            var body = bodies[i];
+                            if ( body.entity.Ball ) {
+                                // Check if a valid ball before registering as target.
+                                if ( body.entity.Ball && body.entity.Ball.valid ) {
+                                    pushBall = body.entity;
+                                    break;
+                                }
+                            }
+                        }
+                        if (pushBall) { // Push if there's a valid target.
+                            color = pushBall.Color2;
+                        }
+
                         Crafty.COURT._puttLineUpdate(
                             Crafty.COURT._pushPoint.x,                         // Start x
                             Crafty.COURT._pushPoint.y,                         // Start y
@@ -516,7 +535,7 @@
                             data.point.x,                                      // End x
                             data.point.y,                                      // End y
                             0,                                                 // End margin
-                            Crafty.COLOR2_COLORS.LGRAY                         // Color
+                            color                                              // Color
                         );
                         Crafty.COURT._puttLine.visible = true;
                     }
