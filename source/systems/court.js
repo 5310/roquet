@@ -316,7 +316,7 @@
                         if ( ball.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
                             ball.Ball.setShowGoal(true);
                             ball.Ball.valid = true;
-                            ball.Ball.makeWave(true, 10);
+                            ball.Ball.makeWave(false, 3);
                             ball.trigger("BallTeamTurn");
                         } else {
                             ball.Ball.setShowGoal(false);

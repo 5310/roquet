@@ -83,7 +83,6 @@
                 self.Ball.valid = false; // A local property to mark the ball valid for putting. To be managed by the putting system.
 
                 self.Ball.makeWave = function(fill, scale) {
-                    var scale = 5;
                     Crafty.COURT.makeWave(
                         function(shape) { // Create wave of ball color.
                             shape.beginFill(self.Color2, fill ? 0.5 : 0);
