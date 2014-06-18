@@ -80,6 +80,8 @@
                 //in terms of movement and collisions with default Obstacle entities.
                 //With it, a suitable region of force has been tested to be applied for putting the Balls of that mass. It's around 0.002.
 
+                self.Ball.valid = false; // A local property to mark the ball valid for putting. To be managed by the putting system.
+
                 self.PhysicsSprite.addOverlay(overlay);
 
             }

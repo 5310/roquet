@@ -333,9 +333,11 @@
                         var ball = Crafty(balls[i]);
                         if ( ball.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
                             ball.Ball.setShowGoal(true);
+                            ball.Ball.valid = true;
                             ball.trigger("BallTeamTurn");
                         } else {
                             ball.Ball.setShowGoal(false);
+                            ball.Ball.valid = false;
                         }
                     }
 
@@ -403,7 +405,7 @@
                         var body = bodies[i];
                         if ( body.entity.Ball ) {
                             // Check if a valid ball before registering as target.
-                            if ( body.entity.Ball && body.entity.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
+                            if ( body.entity.Ball && body.entity.Ball.valid ) {
                                 Crafty.COURT._pullBall = body.entity;
                                 Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                                 break;
@@ -437,7 +439,6 @@
                         force.normalize().mult((force.norm() > maxLength ? maxForce : maxForce*length/maxLength));
 
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
-                        Crafty.COURT.unpause(); // Unpause if putt valid.
                         Crafty.COURT._pullBall.PhysicsBody.applyForce(force); // Apply force.
 
                     } else { // Otherwise, see if there's a push.
@@ -449,7 +450,7 @@
                             var body = bodies[i];
                             if ( body.entity.Ball ) {
                                 // Check if a valid ball before registering as target.
-                                if ( body.entity.Ball && body.entity.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
+                                if ( body.entity.Ball && body.entity.Ball.valid ) {
                                     pushBall = body.entity;
                                     break;
                                 }
@@ -463,9 +464,8 @@
                             var length = force.norm();
                             force.normalize().mult(-1*(length > maxLength ? maxForce : maxForce*length/maxLength));
 
-
                             Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
-//                            Crafty.COURT.unpause(); // Pulls are unpaused when initiating as per design for balance.
+                            Crafty.COURT.unpause(); // Unpause if putt succesful.
                             pushBall.PhysicsBody.applyForce(force); // Apply force.
 
                         }
