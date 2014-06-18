@@ -19,7 +19,9 @@
             },
 
             filter: function(data) {
+                Crafty.trigger("PhysicsCollision", data);
                 var collisions = [];
+                var noCollisions = [];
                 for ( var i = 0; i < data.collisions.length; i++ ) {
                     var collision = data.collisions[i];
                     //NOTE: Inelegant, but works. Ideally, you should be checking for entity and then if it has the Color2 component.
@@ -27,6 +29,8 @@
                         if ( collision.bodyA.entity.Color2Collision & collision.bodyB.entity.Color2Collision ) {
                             if ( collision.bodyA.entity.Color2 & collision.bodyB.entity.Color2 ) {
                                 collisions.push(collision);
+                            } else {
+                                noCollisions.push(collision);
                             }
                         }
                     } catch (e) {}
@@ -35,7 +39,13 @@
                     this._world.emit( 'roquet:collisions:detected', {
                         collisions: collisions
                     });
-                    Crafty.trigger("RoquetCollision", data);
+                    Crafty.trigger("RoquetCollision", collisions);
+                }
+                if ( noCollisions.length ) {
+                    this._world.emit( 'roquet:nocollisions:detected', {
+                        noCollisions: noCollisions
+                    });
+                    Crafty.trigger("RoquetNoCollision", noCollisions);
                 }
             },
 
