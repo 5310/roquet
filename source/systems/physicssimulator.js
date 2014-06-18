@@ -31,6 +31,7 @@
             },
 
             _tick: function (time) {
+                Crafty.trigger("PhysicsTick", time);
                 if (!Crafty.PHYSICSSIMULATOR.paused) {
                     Crafty.PHYSICSSIMULATOR.world.step(time);
                 }
