@@ -136,8 +136,14 @@ var init = function() {
     /* Initialize the court. */
     Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
 
+//    Crafty.COURT._effectsContainer.filters = [color]; // Need to color correct.
+
     Crafty.bind("HammerTap", function(data) {
-        Crafty.COURT.makeWave(data.point.x, data.point.y, 0, 1);
+        Crafty.COURT.makeWave(function(shape, self) {
+            shape.beginFill(0xff0000);
+            Crafty.COURT.graphicRoutines.shapes.hex(shape, self, 20);
+            shape.endFill();
+        }, data.point.x, data.point.y, 0, 2);
     });
 
 

@@ -204,49 +204,31 @@
                         wave.visibility = false;
                     } else {
                         wave.age += aging;
-                        var scale = (1-Math.pow(1-wave.age, 2));
-                        wave.scale.x = 1+scale*5;
-                        wave.scale.y = 1+scale*5;
+                        var factor = (1-Math.pow(1-wave.age, 2));
+                        wave.scale.x = 1+factor*wave.scaleUp;
+                        wave.scale.y = 1+factor*wave.scaleUp;
                         wave.alpha = (1-Math.pow(wave.age, 1.5));
                     }
                 }
             },
-            makeWave: function(x, y, r, team) {
+            makeWave: function(routine, x, y, rotation, scale) {
 
                 var wave = Crafty.COURT._waveBuffer[Crafty.COURT._waveCounter];
                 Crafty.COURT._waveCounter++; Crafty.COURT._waveCounter %= Crafty.COURT._waveLimit;
 
                 var x = x !== undefined ? x : 0;
                 var y = y !== undefined ? y : 0;
-                var r = r !== undefined ? r : 0;
-                var team = team !== undefined ? team : 0;
+                var r = rotation !== undefined ? rotation : 0;
+                var scale = scale !== undefined ? scale : 5;
 
                 wave.clear();
-                wave.beginFill(0x111111, 0);
-                wave.lineStyle(2, 0x111111, 0.75);
-                    switch (team) {
-                        case 0:
-                            wave.drawCircle(0, 0, 16);
-                            break;
-                        case 1:
-                            Crafty.COURT.graphicRoutines.shapes.quad(wave, wave, 16);
-                            break;
-                        case 2:
-                            Crafty.COURT.graphicRoutines.shapes.tri(wave, wave, 16);
-                            break;
-                        case 3:
-                            Crafty.COURT.graphicRoutines.shapes.star(wave, wave, 16);
-                            break;
-                        case 4:
-                            Crafty.COURT.graphicRoutines.shapes.hex(wave, wave, 16);
-                            break;
-                    }
-                wave.endFill();
+                if ( typeof routine === "function" ) routine(wave, this);
                 wave.position.x = x; wave.position.y = y;
                 wave.rotation = r;
 
                 wave.visibility = true;
                 wave.age = 0;
+                wave.scaleUp = scale;
 
                 return wave;
 
@@ -334,6 +316,7 @@
                         if ( ball.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
                             ball.Ball.setShowGoal(true);
                             ball.Ball.valid = true;
+                            ball.Ball.makeWave(true, 10);
                             ball.trigger("BallTeamTurn");
                         } else {
                             ball.Ball.setShowGoal(false);
@@ -393,8 +376,6 @@
 
             _holdStart: function(data) {
 
-                Crafty.COURT.makeWave(data.point.x, data.point.y);
-
                 // Check if current team has any putts left at all before working.
                 if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 ) {
 
@@ -407,6 +388,7 @@
                             // Check if a valid ball before registering as target.
                             if ( body.entity.Ball && body.entity.Ball.valid ) {
                                 Crafty.COURT._pullBall = body.entity;
+                                Crafty.COURT._pullBall.Ball.makeWave();
                                 Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                                 break;
                             }
@@ -415,6 +397,16 @@
 
                     if ( !Crafty.COURT._pullBall ) { // Save pull coordinates if no valid target under cursor.
                         Crafty.COURT._pushPoint.set(data.point.x, data.point.y);
+                        Crafty.COURT.makeWave(
+                            function(shape, self) { // Create wave of ball color.
+                                shape.beginFill(0x000000, 0);
+                                shape.lineStyle(1, Crafty.COLOR2_COLORS.LGRAY, 0.75);
+                                shape.drawCircle(0, 0, 6);
+                                shape.endFill();
+                            },
+                            data.point.x,
+                            data.point.y
+                        );
                     }
 
                 }

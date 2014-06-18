@@ -82,6 +82,37 @@
 
                 self.Ball.valid = false; // A local property to mark the ball valid for putting. To be managed by the putting system.
 
+                self.Ball.makeWave = function(fill, scale) {
+                    var scale = 5;
+                    Crafty.COURT.makeWave(
+                        function(shape) { // Create wave of ball color.
+                            shape.beginFill(self.Color2, fill ? 0.5 : 0);
+                            shape.lineStyle(1, self.Color2, fill ? 0 : 0.75);
+                            var team = self.Ball.team;
+                            var radius = self.Ball._radius;
+                            switch (team) {
+                                case 1:
+                                    Crafty.COURT.graphicRoutines.shapes.quad(shape, self, radius);
+                                    break;
+                                case 2:
+                                    Crafty.COURT.graphicRoutines.shapes.tri(shape, self, radius);
+                                    break;
+                                case 3:
+                                    Crafty.COURT.graphicRoutines.shapes.star(shape, self, radius);
+                                    break;
+                                case 4:
+                                    Crafty.COURT.graphicRoutines.shapes.hex(shape, self, radius);
+                                    break;
+                            }
+                            shape.endFill();
+                        },
+                        self.PhysicsBody.state.pos.x,
+                        self.PhysicsBody.state.pos.y,
+                        self.PhysicsBody.state.angular.pos,
+                        scale
+                    );
+                }
+
                 self.PhysicsSprite.addOverlay(overlay);
 
             }
