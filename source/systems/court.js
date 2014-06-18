@@ -497,7 +497,9 @@
                 var data = Crafty.COURT._lastPoint;
                 if ( !data ) return;
                 if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 ) {
+
                     if (Crafty.COURT._pullBall) {
+
                         Crafty.COURT._puttLineUpdate(
                             Crafty.COURT._pullBall.PhysicsBody.state.pos.x,    // Start x
                             Crafty.COURT._pullBall.PhysicsBody.state.pos.y,    // Start y
@@ -508,7 +510,10 @@
                             Crafty.COURT._pullBall.Color2                      // Color
                         );
                         Crafty.COURT._puttLine.visible = true;
+
                     } else {
+
+                        console.log(1);
 
                         var color = Crafty.COLOR2_COLORS.LGRAY;
 
@@ -538,6 +543,7 @@
                             color                                              // Color
                         );
                         Crafty.COURT._puttLine.visible = true;
+
                     }
                 } else {
                     Crafty.COURT._puttLine.visible = false;
@@ -599,6 +605,8 @@
 
                             //TODO: Particle effects.
 
+                        } else {
+                            Crafty.COURT._lastPoint = undefined; // Reset
                         }
                     }
 
