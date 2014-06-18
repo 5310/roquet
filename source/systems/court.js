@@ -94,13 +94,17 @@
                 digit: function (shape, self, radius, number) {
                     var radius = radius ? radius : 10;
                     var number = number !== undefined ? Math.floor(number) : -1;
-                    shape.beginFill(0x000000);
                     var normalizer = radius/16; // Because I designed them for 16px radius and don't want to use messy fractions because of readability.
                     switch (number) {
                         case 0:
-                            shape.beginFill(0x000000, 0);
-                            shape.lineStyle(radius*0.15, 0x000000);
-                            shape.drawCircle( 0,  0, radius*0.5);
+                            shape.moveTo( radius*0.5, -radius*0.6 );
+                            shape.lineTo( radius*0.6, -radius*0.5 );
+                            shape.lineTo( -radius*0.5, radius*0.6 );
+                            shape.lineTo( -radius*0.6, radius*0.5 );
+                            shape.moveTo( -radius*0.5, -radius*0.6 );
+                            shape.lineTo( -radius*0.6, -radius*0.5 );
+                            shape.lineTo( radius*0.5, radius*0.6 );
+                            shape.lineTo( radius*0.6, radius*0.5 );
                             break;
                         case 1:
                             shape.drawCircle( 0,  0, radius*0.4);
@@ -172,8 +176,6 @@
                             shape.drawRect(-radius*1.5/2, -radius*0.15/2 +4, radius*1.5, radius*0.15);
                             break;
                     }
-
-                    shape.endFill();
                 }
             },
 

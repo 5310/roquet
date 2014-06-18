@@ -100,7 +100,9 @@ var init = function() {
         .PhysicsBodyPosition(300, 300)
         .then(function() {
             var overlay = function(shape, self) {
+                shape.beginFill(0x000000);
                 Crafty.COURT.graphicRoutines.digit(shape, self, 16);
+                shape.endFill();
             }
             this.PhysicsSprite.addOverlay( overlay );
         });
@@ -133,6 +135,22 @@ var init = function() {
 
     /* Initialize the court. */
     Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
+
+
+    effectsContains = new PIXI.DisplayObjectContainer();
+    Crafty.PIXIRENDERER.stage.addChild(effectsContains);wave = new PIXI.Graphics();
+
+    wave.beginFill(0x111111, 0.5);
+    wave.drawCircle(0, 0, 20);
+    wave.endFill();
+    wave.position.x = 400; wave.position.y = 200;
+    effectsContains.addChild(wave);
+
+    Crafty.bind("PixiEnterFrame", function() {
+        wave.scale.x *= 1.2;
+        wave.scale.y *= 1.2;
+    });
+
 
 };
 

@@ -4,32 +4,26 @@
         var radius = self.Ball._radius;
         var team = self.Ball.team;
         var nextGoal = self.Ball.nextGoal;
+        shape.beginFill(0x000000);
         if (!self.Ball.showNextGoal) {
             switch (team) {
                 case 1:
-                    shape.beginFill(0x000000);
                     Crafty.COURT.graphicRoutines.shapes.quad(shape, self, radius);
-                    shape.endFill();
                     break;
                 case 2:
-                    shape.beginFill(0x000000);
                     Crafty.COURT.graphicRoutines.shapes.tri(shape, self, radius);
-                    shape.endFill();
                     break;
                 case 3:
-                    shape.beginFill(0x000000);
                     Crafty.COURT.graphicRoutines.shapes.star(shape, self, radius);
-                    shape.endFill();
                     break;
                 case 4:
-                    shape.beginFill(0x000000);
                     Crafty.COURT.graphicRoutines.shapes.hex(shape, self, radius);
-                    shape.endFill();
                     break;
             }
         } else {
             Crafty.COURT.graphicRoutines.digit(shape, self, radius, nextGoal);
         }
+        shape.endFill();
     };
 
     Crafty.c(

@@ -58,7 +58,9 @@
                 self.Goal._setPhysicsBody();
 
                 self.PhysicsSprite.addOverlay(function(shape, self) {
+                    shape.beginFill(0x000000);
                     Crafty.COURT.graphicRoutines.digit(shape, self, self.Goal._radius, self.Goal.number);
+                    shape.endFill();
                 });
 
                 this.bind("PhysicsField", field.bind(this));
