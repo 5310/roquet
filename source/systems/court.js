@@ -248,8 +248,6 @@
                 wave.visibility = true;
                 wave.age = 0;
 
-                console.log(Crafty.COURT._waveCounter);
-
                 return wave;
 
             },
@@ -407,13 +405,13 @@
                             // Check if a valid ball before registering as target.
                             if ( body.entity.Ball && body.entity.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
                                 Crafty.COURT._pullBall = body.entity;
+                                Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                                 break;
                             }
                         }
                     }
 
                     if ( !Crafty.COURT._pullBall ) { // Save pull coordinates if no valid target under cursor.
-                        Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                         Crafty.COURT._pushPoint.set(data.point.x, data.point.y);
                     }
 
