@@ -22,14 +22,11 @@
                 shapes: {
                     quad: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
-                        shape.beginFill(0x000000);
                         var squareWidth = radius;
                         shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
-                        shape.endFill();
                     },
                     tri: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
-                        shape.beginFill(0x000000);
                         var triSpoke = radius*0.8;
                         shape.moveTo(0, -triSpoke);
                         shape.lineTo(
@@ -40,11 +37,9 @@
                             -Math.cos(Math.PI/6)*triSpoke,
                             Math.sin(Math.PI/6)*triSpoke
                         );
-                        shape.endFill();
                     },
                     star: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
-                        shape.beginFill(0x000000);
                         var starSpoke = radius*0.75;
                         var starCrease = 0.6;
                         shape.moveTo(0, -starSpoke);
@@ -84,11 +79,9 @@
                             -Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
                             -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
                         );
-                        shape.endFill();
                     },
                     hex: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
-                        shape.beginFill(0x000000);
                         var hexSpoke = radius*0.7;
                         shape.moveTo(0, -hexSpoke);
                         shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
@@ -96,7 +89,6 @@
                         shape.lineTo(0, hexSpoke);
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                        shape.endFill();
                     }
                 },
                 digit: function (shape, self, radius, number) {
