@@ -37,6 +37,7 @@
                             -Math.cos(Math.PI/6)*triSpoke,
                             Math.sin(Math.PI/6)*triSpoke
                         );
+                        shape.lineTo(0, -triSpoke);
                     },
                     star: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
@@ -79,6 +80,7 @@
                             -Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
                             -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
                         );
+                        shape.lineTo(0, -starSpoke);
                     },
                     hex: function(shape, self, radius) {
                         var radius = radius ? radius : 10;
@@ -89,6 +91,7 @@
                         shape.lineTo(0, hexSpoke);
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(0, -hexSpoke);
                     }
                 },
                 digit: function (shape, self, radius, number) {
