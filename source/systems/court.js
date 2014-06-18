@@ -5,6 +5,7 @@
 
             _pullBall: undefined,
             _pushPoint: new Physics.vector(),
+            _lastPoint: undefined,
 
             maxPuttForce: 0.0005,
             maxPuttLength: 200,
@@ -183,23 +184,23 @@
             },
 
             _effectsContainer: undefined,
-            _waveLimit: 10,
+
+            _waveLimit: 20,
             _waveBuffer: [],
             _waveCounter: 0,
             _initWave: function() {
                 for ( var i = 0; i < Crafty.COURT._waveLimit; i++) {
                     var wave = new PIXI.Graphics();
                     wave.age = 1;
-                    wave.id = i;
                     wave.visibility = false;
                     Crafty.COURT._effectsContainer.addChild(wave);
                     Crafty.COURT._waveBuffer.push(wave);
                 }
             },
             _updateWave: function() {
-                var aging = 0.05;
                 for ( var i = 0; i < Crafty.COURT._waveBuffer.length; i++ ) {
                     var wave = Crafty.COURT._waveBuffer[i];
+                    var aging = 1/wave.lifetime;
                     if ( wave.age >= 1 ) {
                         wave.visibility = false;
                     } else {
@@ -211,7 +212,7 @@
                     }
                 }
             },
-            makeWave: function(routine, x, y, rotation, scale) {
+            makeWave: function(routine, x, y, rotation, scale, lifetime) {
 
                 var wave = Crafty.COURT._waveBuffer[Crafty.COURT._waveCounter];
                 Crafty.COURT._waveCounter++; Crafty.COURT._waveCounter %= Crafty.COURT._waveLimit;
@@ -220,6 +221,7 @@
                 var y = y !== undefined ? y : 0;
                 var r = rotation !== undefined ? rotation : 0;
                 var scale = scale !== undefined ? scale : 5;
+                var lifetime = lifetime !== undefined ? lifetime : 24; // In ms.
 
                 wave.clear();
                 if ( typeof routine === "function" ) routine(wave, this);
@@ -229,9 +231,61 @@
                 wave.visibility = true;
                 wave.age = 0;
                 wave.scaleUp = scale;
+                wave.lifetime = lifetime;
 
                 return wave;
 
+            },
+
+            _validPulseInterval: 30,
+            _validPulseCounter: 0,
+            _validPulseUpdate: function() {
+                Crafty.COURT._validPulseCounter++;
+                var validBalls = [];
+                if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 && Crafty.COURT._validPulseCounter >= Crafty.COURT._validPulseInterval ) {
+                    // Periodically, if there are putts available.
+                    var balls = Crafty("Ball");
+                    for ( var i = 0; i < balls.length; i++) { // Check all balls.
+                        var ball = Crafty(balls[i]);
+                        if ( ball.Ball.valid ) { // If a ball is valid.
+                            validBalls.push(ball);
+                        }
+                    }
+                }
+                Crafty.COURT._validPulseCounter %= Crafty.COURT._validPulseInterval;
+                for ( var i = 0; i < validBalls.length; i++) { // Check all balls.
+                    var ball = validBalls[i];
+                    var timeout = function(ball) { // Create a closured callback.
+                        var ball = ball;
+                        return function() {
+                            Crafty.COURT.makeWave( // Create a circular wave of that ball's color on that ball.
+                                function(shape) {
+                                    shape.beginFill(0, 0);
+                                    shape.lineStyle(2, ball.Color2, 0.15);
+                                    shape.drawCircle(0,0, ball.Ball._radius);
+                                    shape.endFill();
+                                }, // routine
+                                ball.PhysicsBody.state.pos.x,
+                                ball.PhysicsBody.state.pos.y,
+                                0,  // rotation
+                                1,  // scale
+                                50
+                            );
+                        };
+                    };
+                    setTimeout( timeout(ball), (Crafty.COURT._validPulseInterval/60*1000)/validBalls.length*i ); // And call with a equally timed delay for each unique valid ball.
+                }
+            },
+
+            _puttLine: undefined,
+            _puttLineUpdate: function(startX, startY, startMargin, endX, endY, endMargin, color) {
+                var color = color !== undefined ? color : Crafty.COLOR2_COLORS.LGRAY;
+                Crafty.COURT._puttLine.clear();
+                Crafty.COURT._puttLine.beginFill(0, 0);
+                Crafty.COURT._puttLine.lineStyle(2, color, 0.5);
+                Crafty.COURT._puttLine.moveTo(startX, startY);
+                Crafty.COURT._puttLine.lineTo(endX, endY);
+                Crafty.COURT._puttLine.endFill();
             },
 
             scoreTarget: 6,
@@ -251,6 +305,8 @@
 
                 Crafty.bind("HammerDoubleTap", Crafty.COURT._doubleTap);
                 Crafty.bind("HammerHoldStart", Crafty.COURT._holdStart);
+                Crafty.bind("HammerHoldDrag", Crafty.COURT._holdDrag);
+                Crafty.bind("PhysicsTick", Crafty.COURT._holdDragTick); // Although a drag event, this is on the generic physics tick event to update even while point not moving.
                 Crafty.bind("HammerHoldEnd", Crafty.COURT._holdEnd);
 
                 //TODO: Initialize all the court entities: balls, obstacles, goals.
@@ -276,11 +332,19 @@
 
                 // Create effects container Pixi layer.
                 Crafty.COURT._effectsContainer = new PIXI.DisplayObjectContainer();
-                Crafty.PIXIRENDERER.stage.addChild(Crafty.COURT._effectsContainer);wave = new PIXI.Graphics();
+                Crafty.PIXIRENDERER.stage.addChild(Crafty.COURT._effectsContainer);
 
                 // Set up wave effects.
                 Crafty.COURT._initWave();
                 Crafty.bind("PixiEnterFrame", Crafty.COURT._updateWave);
+
+                // Set up valid ball pulse effects.
+                Crafty.bind("PhysicsTick", Crafty.COURT._validPulseUpdate);
+
+                // Set up putting feedback line.
+                Crafty.COURT._puttLine = new PIXI.Graphics();
+                Crafty.COURT._puttLine.visible = false;
+                Crafty.COURT._effectsContainer.addChild(Crafty.COURT._puttLine);
 
             },
 
@@ -316,7 +380,6 @@
                         if ( ball.Ball.team == Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team ) {
                             ball.Ball.setShowGoal(true);
                             ball.Ball.valid = true;
-                            ball.Ball.makeWave(false, 3);
                             ball.trigger("BallTeamTurn");
                         } else {
                             ball.Ball.setShowGoal(false);
@@ -325,6 +388,8 @@
                     }
 
                     Crafty.COURT.pause(); // Pause again.
+
+                    Crafty.COURT._lastPoint = undefined; // Clear last caught pointer.
 
                     console.log("Current teamIndex: "+Crafty.COURT.turnTeamIndex); //NOTE:
 
@@ -388,7 +453,18 @@
                             // Check if a valid ball before registering as target.
                             if ( body.entity.Ball && body.entity.Ball.valid ) {
                                 Crafty.COURT._pullBall = body.entity;
-                                Crafty.COURT._pullBall.Ball.makeWave();
+                                Crafty.COURT.makeWave(
+                                    function(shape, self) { // Create wave of ball's color.
+                                        shape.beginFill(0x000000, 0);
+                                        shape.lineStyle(1, Crafty.COURT._pullBall.Color2, 0.9);
+                                        shape.drawCircle(0, 0, 16);
+                                        shape.endFill();
+                                    },
+                                    Crafty.COURT._pullBall.PhysicsBody.state.pos.x,
+                                    Crafty.COURT._pullBall.PhysicsBody.state.pos.y,
+                                    0,
+                                    2
+                                );
                                 Crafty.COURT.unpause(); // Unpause when initiating pulls as designed for balance.
                                 break;
                             }
@@ -398,19 +474,55 @@
                     if ( !Crafty.COURT._pullBall ) { // Save pull coordinates if no valid target under cursor.
                         Crafty.COURT._pushPoint.set(data.point.x, data.point.y);
                         Crafty.COURT.makeWave(
-                            function(shape, self) { // Create wave of ball color.
+                            function(shape, self) { // Create wave of neutral gray.
                                 shape.beginFill(0x000000, 0);
                                 shape.lineStyle(1, Crafty.COLOR2_COLORS.LGRAY, 0.75);
-                                shape.drawCircle(0, 0, 6);
+                                shape.drawCircle(0, 0, 4);
                                 shape.endFill();
                             },
                             data.point.x,
-                            data.point.y
+                            data.point.y,
+                            0,
+                            5
                         );
                     }
 
                 }
 
+            },
+            _holdDragTick: function() {
+                var data = Crafty.COURT._lastPoint;
+                if ( !data ) return;
+                if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 ) {
+                    if (Crafty.COURT._pullBall) {
+                        Crafty.COURT._puttLineUpdate(
+                            Crafty.COURT._pullBall.PhysicsBody.state.pos.x,    // Start x
+                            Crafty.COURT._pullBall.PhysicsBody.state.pos.y,    // Start y
+                            Crafty.COURT._pullBall.Ball.radius,                // Start margin
+                            data.point.x,                                      // End x
+                            data.point.y,                                      // End y
+                            0,                                                 // End margin
+                            Crafty.COURT._pullBall.Color2                      // Color
+                        );
+                        Crafty.COURT._puttLine.visible = true;
+                    } else {
+                        Crafty.COURT._puttLineUpdate(
+                            Crafty.COURT._pushPoint.x,                         // Start x
+                            Crafty.COURT._pushPoint.y,                         // Start y
+                            0,                                                 // Start margin
+                            data.point.x,                                      // End x
+                            data.point.y,                                      // End y
+                            0,                                                 // End margin
+                            Crafty.COLOR2_COLORS.LGRAY                         // Color
+                        );
+                        Crafty.COURT._puttLine.visible = true;
+                    }
+                } else {
+                    Crafty.COURT._puttLine.visible = false;
+                }
+            },
+            _holdDrag: function(data) {
+                Crafty.COURT._lastPoint = data;
             },
             _holdEnd: function(data) {
 
@@ -432,6 +544,8 @@
 
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
                         Crafty.COURT._pullBall.PhysicsBody.applyForce(force); // Apply force.
+
+                        //TODO: Particle effects.
 
                     } else { // Otherwise, see if there's a push.
 
@@ -460,10 +574,13 @@
                             Crafty.COURT.unpause(); // Unpause if putt succesful.
                             pushBall.PhysicsBody.applyForce(force); // Apply force.
 
+                            //TODO: Particle effects.
+
                         }
                     }
 
                 }
+                Crafty.COURT._puttLine.visible = false; // No matter what, hide the putting line.
             },
 
         }
