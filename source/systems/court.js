@@ -283,8 +283,9 @@
                 Crafty.COURT._puttLine.clear();
                 Crafty.COURT._puttLine.beginFill(0, 0);
                 Crafty.COURT._puttLine.lineStyle(2, color, 0.5);
-                Crafty.COURT._puttLine.moveTo(startX, startY);
-                Crafty.COURT._puttLine.lineTo(endX, endY);
+                var angle = Math.atan2(endY-startY, endX-startX);
+                Crafty.COURT._puttLine.moveTo(startX+Math.cos(angle)*startMargin, startY+Math.sin(angle)*startMargin);
+                Crafty.COURT._puttLine.lineTo(endX-Math.cos(angle)*endMargin, endY-Math.sin(angle)*endMargin);
                 Crafty.COURT._puttLine.endFill();
             },
 
@@ -389,7 +390,9 @@
 
                     Crafty.COURT.pause(); // Pause again.
 
+                    Crafty.COURT._pullBall = undefined; // Reset.
                     Crafty.COURT._lastPoint = undefined; // Clear last caught pointer.
+                    Crafty.COURT._puttLine.visible = false; // No matter what, hide the putting line.
 
                     console.log("Current teamIndex: "+Crafty.COURT.turnTeamIndex); //NOTE:
 
@@ -498,7 +501,7 @@
                         Crafty.COURT._puttLineUpdate(
                             Crafty.COURT._pullBall.PhysicsBody.state.pos.x,    // Start x
                             Crafty.COURT._pullBall.PhysicsBody.state.pos.y,    // Start y
-                            Crafty.COURT._pullBall.Ball.radius,                // Start margin
+                            Crafty.COURT._pullBall.Ball._radius,                // Start margin
                             data.point.x,                                      // End x
                             data.point.y,                                      // End y
                             0,                                                 // End margin
@@ -544,6 +547,7 @@
 
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts--; // Reduce available putts
                         Crafty.COURT._pullBall.PhysicsBody.applyForce(force); // Apply force.
+                        Crafty.COURT._pullBall = undefined; // Reset.
 
                         //TODO: Particle effects.
 
