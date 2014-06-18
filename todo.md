@@ -51,7 +51,7 @@
         - [x]   The Obstacle component.
         - [x]   The Field components.
             - [x]   Write the PhysicsJS behavior that applies method from field bodies upon intersection.
-            - [x]   Write the component.
+            - [x]   Write the attractor component.
         - [x]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
 
 - [ ]   Beta:
@@ -81,8 +81,8 @@
             - [ ]   Overlay-based stextures for all the fields.
     
     - [ ]   In-game interface.
-        - [ ]   Pause-screen overlays.
-        - [ ]   Putting visual feedback.
+        - [ ]   Score-screen.
+        - [x]   Putting visual feedback.
         - [x]   Numeric overlays on active team's balls.
         
 - [ ]   Pre-prototype-release:
