@@ -329,9 +329,11 @@
                 // Call the scheme set-up function.
                 data.setup();
 
-                // Set highest goal to all the balls as their next goal.
+                // Reused queries.
                 var numGoals = Crafty("Goal").length;
                 var balls = Crafty("Ball");
+
+                // Set highest goal to all the balls as their next goal.
                 for (var i = 0; i < balls.length; i++ ) {
                     var ball = Crafty(balls[i]);
                     ball.Ball.nextGoal = numGoals;
