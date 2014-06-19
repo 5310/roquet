@@ -312,7 +312,7 @@
 
             init: function ( data ) {
 
-                // Bind handlers.
+                /* Bind handlers. */
 
                 Crafty.bind("PhysicsStep", Crafty.COURT._step);
 
@@ -324,10 +324,12 @@
                 Crafty.bind("PhysicsTick", Crafty.COURT._holdDragTick); // Although a drag event, this is on the generic physics tick event to update even while point not moving.
                 Crafty.bind("HammerHoldEnd", Crafty.COURT._holdEnd);
 
+                /* Set-up court scheme */
+
                 // Call the scheme set-up function.
                 data.setup();
 
-                //TODO: Initialize all the court entities: balls, obstacles, goals.
+                // Set highest goal to all the balls as their next goal.
                 var numGoals = Crafty("Goal").length;
                 var balls = Crafty("Ball");
                 for (var i = 0; i < balls.length; i++ ) {
@@ -346,7 +348,7 @@
 
                 //TODO: Calculate target score from number of balls and goals. Is this for every team?
 
-                // Set-up effects and interface layers.
+                /* Set-up effects and interface layers. */
 
                 // Create effects container Pixi layer.
                 Crafty.COURT._effectsContainer = new PIXI.DisplayObjectContainer();
