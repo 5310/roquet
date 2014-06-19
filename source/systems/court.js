@@ -459,6 +459,7 @@
                             " current goal: "+goal.Goal.number+
                             " own team: "+ball.Ball.team+
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
+                    ball.Ball.makeWave();
                     Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score++;
                     ball.Ball.setNextGoal(--ball.Ball.nextGoal);
                     if (
@@ -466,7 +467,7 @@
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].scoreTarget
                     ) {
                         console.log('WIN!'); //NOTE:
-                        //TODO: Victory routine.
+                        // Victory routine.
                     }
                 }
 
