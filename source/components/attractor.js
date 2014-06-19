@@ -52,7 +52,7 @@
                         Crafty.COURT.graphicRoutines.shapes.arrow(
                             shape, self,
                             (self.Attractor._radius+self.Attractor._margin)/3,
-                            (angle+Math.PI)+Math.PI*Math.sign(self.PhysicsFieldAttractor.strength),
+                            (angle+Math.PI)+Math.PI*( self.PhysicsFieldAttractor.strength > 0 ? 1 : -1),
                             x, y);
                     }
                     shape.endFill();

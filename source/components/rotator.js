@@ -51,7 +51,7 @@
                         Crafty.COURT.graphicRoutines.shapes.arrow(
                             shape, self,
                             (self.Rotator._radius+self.Rotator._margin)/4,
-                            (angle+Math.PI/2)*Math.sign(self.PhysicsFieldRotator.strength),
+                            (angle+Math.PI/2)*( self.PhysicsFieldRotator.strength > 0 ? 1 : -1),
                             x, y);
                     }
                     shape.endFill();
