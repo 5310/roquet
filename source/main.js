@@ -25,11 +25,6 @@ var init = function() {
     // Alias world.
     world = Crafty.PHYSICSSIMULATOR.world;
 
-//    // Add gravity.
-//    world.add( Physics.behavior('constant-acceleration', {
-//        acc: { x : 0, y: 0.0001 } // this is the default
-//    }) );
-
     // Set integrator and drag.
     world.add( Physics.integrator('verlet', {drag: 0.001}) );
 
@@ -63,25 +58,16 @@ var init = function() {
         world.render();
     });
 
-//    // Test for hit-test.
-//    Crafty.bind("HammerTap", function(data) {
-//        console.log(Crafty.PHYSICSSIMULATOR.hitTest(data.point.x, data.point.y));
-
 
 
     /* Initialize the court. */
+
+    // Initialize the system.
     Crafty.COURT.init( Crafty.COURT.schemes.basic );
 
+    // Add color filter.
     Crafty.COURT._effectsContainer.filterArea = new PIXI.Rectangle(0,0,800,480); // Reset filter area.
     Crafty.COURT._effectsContainer.filters = [color]; // Apply color filter to effects too.
-
-//    Crafty.bind("HammerTap", function(data) {
-//        Crafty.COURT.makeWave(function(shape, self) {
-//            shape.beginFill(0xff0000);
-//            Crafty.COURT.graphicRoutines.shapes.hex(shape, self, 20);
-//            shape.endFill();
-//        }, data.point.x, data.point.y, 0, 2);
-//    });
 
 
 };
