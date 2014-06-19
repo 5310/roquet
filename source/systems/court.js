@@ -339,16 +339,26 @@
                     ball.Ball.nextGoal = numGoals;
                 }
 
-                // Set-up playing teams' states.
+                // Set-up playing teams' base states.
                 for ( var i in data.playingTeams ) {
                     Crafty.COURT.playingTeams[i] = {
                         team: data.playingTeams[i],
                         putts: 1,
                         score: 0,
+                        scoreTarget: 0
                     };
                 }
 
-                //TODO: Calculate target score from number of balls and goals. Is this for every team?
+                // Calculate target score for all the teams.
+                for ( var i = 0; i < balls.length; i++ ) {
+                    var ball = Crafty(balls[i]);
+                    for ( var j = 0; j < Crafty.COURT.playingTeams.length; j++ ) {
+                        var teamState = Crafty.COURT.playingTeams[j];
+                        if ( ball.Ball.team == teamState.team ) {
+                            teamState.scoreTarget += numGoals;
+                        }
+                    }
+                }
 
                 /* Set-up effects and interface layers. */
 
@@ -451,7 +461,10 @@
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
                     Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score++;
                     ball.Ball.setNextGoal(--ball.Ball.nextGoal);
-                    if (Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >= Crafty.COURT.scoreTarget) {
+                    if (
+                        Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >=
+                        Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].scoreTarget
+                    ) {
                         console.log('WIN!'); //NOTE:
                         //TODO: Victory routine.
                     }
