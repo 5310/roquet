@@ -77,7 +77,7 @@
                 - [ ]   Ball placement.
         - [ ]   More Field components.
             - [ ]   Conveyor
-            - [ ]   Rotator
+            - [x]   Rotator
             - [ ]   Overlay-based stextures for all the fields.
     
     - [ ]   In-game interface.
