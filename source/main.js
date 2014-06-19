@@ -96,15 +96,11 @@ var init = function() {
         .Color2Set(Crafty.COLOR2_COLORS.MAGENTA)
         .PhysicsBodyPosition(100+50+20, 100+50);
 
-    eightBall = Crafty.e("Thennable", "Ball")
+    eightBall = Crafty.e("Thennable", "Attractor")
         .PhysicsBodyPosition(300, 300)
         .then(function() {
-            var overlay = function(shape, self) {
-                shape.beginFill(0x000000);
-                Crafty.COURT.graphicRoutines.digit(shape, self, 16);
-                shape.endFill();
-            }
-            this.PhysicsSprite.addOverlay( overlay );
+            this.PhysicsFieldAttractor.strength *= -1;
+            this.PhysicsSprite.generateSprite();
         });
 
     goal1 = Crafty.e("Thennable", "Goal")

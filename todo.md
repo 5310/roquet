@@ -75,10 +75,10 @@
             - [ ]   Data-driven level generation.
                 - [ ]   Obstacle and field generation.
                 - [ ]   Ball placement.
-        - [ ]   More Field components.
+        - [x]   More Field components.
             - [x]   Conveyor
             - [x]   Rotator
-            - [ ]   Overlay-based stextures for all the fields.
+            - [x]   Overlay-based stextures for all the fields.
     
     - [ ]   In-game interface.
         - [ ]   Score-screen.

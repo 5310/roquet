@@ -94,15 +94,17 @@
                         shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
                         shape.lineTo(0, -hexSpoke);
                     },
-                    arrow: function(shape, self, radius, angle) {
+                    arrow: function(shape, self, radius, angle, x, y) {
                         var radius = radius ? radius : 10;
                         var angle = angle !== undefined ? angle : 0;
+                        var x = x !== undefined ? x : 0;
+                        var y = y !== undefined ? y : 0;
                         var factor = 0.9;
-                        shape.moveTo(Math.cos(angle+Math.PI)*radius*factor, Math.sin(angle+Math.PI)*radius*factor);
-                        shape.lineTo(Math.cos(angle)*radius*factor, Math.sin(angle)*radius*factor);
-                        shape.lineTo(Math.cos(angle+Math.PI/2)*radius*factor, Math.sin(angle+Math.PI/2)*radius*factor);
-                        shape.moveTo(Math.cos(angle)*radius*factor, Math.sin(angle)*radius*factor);
-                        shape.lineTo(Math.cos(angle-Math.PI/2)*radius*factor, Math.sin(angle-Math.PI/2)*radius*factor);
+                        shape.moveTo(x+Math.cos(angle+Math.PI)*radius*factor, y+Math.sin(angle+Math.PI)*radius*factor);
+                        shape.lineTo(x+Math.cos(angle)*radius*factor, y+Math.sin(angle)*radius*factor);
+                        shape.lineTo(x+Math.cos(angle+Math.PI/2)*radius*factor, y+Math.sin(angle+Math.PI/2)*radius*factor);
+                        shape.moveTo(x+Math.cos(angle)*radius*factor, y+Math.sin(angle)*radius*factor);
+                        shape.lineTo(x+Math.cos(angle-Math.PI/2)*radius*factor, y+Math.sin(angle-Math.PI/2)*radius*factor);
                     }
                 },
                 digit: function (shape, self, radius, number) {
@@ -522,8 +524,6 @@
                         Crafty.COURT._puttLine.visible = true;
 
                     } else {
-
-                        console.log(1);
 
                         var color = Crafty.COLOR2_COLORS.LGRAY;
 

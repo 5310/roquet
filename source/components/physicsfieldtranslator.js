@@ -19,13 +19,14 @@
         var f = body.mass * this.PhysicsFieldTranslator.strength * Math.pow(norm, this.PhysicsFieldTranslator.order);
 
         // dampen the body
-        body.state.vel.mult(this.PhysicsFieldAttractor.friction);
+        body.state.vel.mult(this.PhysicsFieldTranslator.friction);
 
         // apply translational acceleration
         if ( this.PhysicsFieldTranslator.normalize ) {
             body.accelerate( this.PhysicsFieldTranslator.direction.clone().normalize().mult(f) );
         } else {
-            body.accelerate( this.PhysicsFieldTranslator.direction.clone().mult(f) );
+            var g = this.PhysicsFieldTranslator.direction.clone().mult(f);
+            body.accelerate( g );
         }
 
     };

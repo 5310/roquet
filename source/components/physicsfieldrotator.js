@@ -19,7 +19,7 @@
         var f = body.mass * this.PhysicsFieldRotator.strength * Math.pow(norm, this.PhysicsFieldRotator.order);
 
         // dampen the body
-        body.state.vel.mult(this.PhysicsFieldAttractor.friction);
+        body.state.vel.mult(this.PhysicsFieldRotator.friction);
 
         // apply rotational acceleration
         if ( this.PhysicsFieldRotator.orbital ) { // if field set to orbital rotation, rotate around center of field
@@ -43,7 +43,7 @@
                 this.PhysicsFieldRotator = {};
 
                 this.PhysicsFieldRotator.strength = 1; // Positive for clockwise.
-                this.PhysicsFieldRotator.order = -2;
+                this.PhysicsFieldRotator.order = 0;
                 this.PhysicsFieldRotator.friction = 1;
                 this.PhysicsFieldRotator.orbital = false;
 
