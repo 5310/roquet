@@ -3,6 +3,8 @@
     Crafty.extend({
         COURT: {
 
+            schemes: {},
+
             _pullBall: undefined,
             _pushPoint: new Physics.vector(),
             _lastPoint: undefined,
@@ -321,6 +323,9 @@
                 Crafty.bind("HammerHoldDrag", Crafty.COURT._holdDrag);
                 Crafty.bind("PhysicsTick", Crafty.COURT._holdDragTick); // Although a drag event, this is on the generic physics tick event to update even while point not moving.
                 Crafty.bind("HammerHoldEnd", Crafty.COURT._holdEnd);
+
+                // Call the scheme set-up function.
+                data.setup();
 
                 //TODO: Initialize all the court entities: balls, obstacles, goals.
                 var numGoals = Crafty("Goal").length;

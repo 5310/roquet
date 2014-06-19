@@ -69,68 +69,8 @@ var init = function() {
 
 
 
-    /* Add demo entities. */
-
-    redBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.TRI)
-        .Color2Set(Crafty.COLOR2_COLORS.RED)
-        .PhysicsBodyPosition(100-50, 100);
-    greenBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.STAR)
-        .Color2Set(Crafty.COLOR2_COLORS.GREEN)
-        .PhysicsBodyPosition(100, 100);
-    blueBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.HEX)
-        .Color2Set(Crafty.COLOR2_COLORS.BLUE)
-        .PhysicsBodyPosition(100+50, 100);
-    yellowBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.TRI)
-        .Color2Set(Crafty.COLOR2_COLORS.YELLOW)
-        .PhysicsBodyPosition(100-50+20, 100+50);
-    cyanBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.STAR)
-        .Color2Set(Crafty.COLOR2_COLORS.CYAN)
-        .PhysicsBodyPosition(100+20, 100+50);
-    magentaBall = Crafty.e("Thennable", "Ball")
-        .Ball.setTeam(Crafty.COURT.teams.HEX)
-        .Color2Set(Crafty.COLOR2_COLORS.MAGENTA)
-        .PhysicsBodyPosition(100+50+20, 100+50);
-
-    eightBall = Crafty.e("Thennable", "Attractor")
-        .PhysicsBodyPosition(300, 300)
-        .then(function() {
-            this.PhysicsFieldAttractor.strength *= -1;
-            this.PhysicsSprite.generateSprite();
-        });
-
-    goal1 = Crafty.e("Thennable", "Goal")
-        .PhysicsBodyPosition(150, 240)
-        .then(function() {
-            this.PhysicsFieldAttractor.strength = 0.01;
-            this.PhysicsFieldAttractor.friction = 0.95;
-        });
-    goal2 = Crafty.e("Thennable", "Goal")
-        .PhysicsBodyPosition(700, 40);
-    goal3 = Crafty.e("Thennable", "Goal")
-        .PhysicsBodyPosition(650, 300);
-
-    floor = Crafty.e("Thennable", "Obstacle")
-        .PhysicsBodySet('convex-polygon', {
-            x: 400,
-            y: 400,
-            vertices: [
-                { x: -400, y: -30 },
-                { x: -400, y: 30 },
-                { x: 400, y: 30 },
-//                { x: 400, y: -30 },
-            ]
-        });
-//    });
-
-
-
     /* Initialize the court. */
-    Crafty.COURT.init( {playingTeams: [Crafty.COURT.teams.TRI, Crafty.COURT.teams.STAR, Crafty.COURT.teams.HEX]} );
+    Crafty.COURT.init( Crafty.COURT.schemes.basic );
 
     Crafty.COURT._effectsContainer.filterArea = new PIXI.Rectangle(0,0,800,480); // Reset filter area.
     Crafty.COURT._effectsContainer.filters = [color]; // Apply color filter to effects too.
