@@ -76,7 +76,7 @@
                 - [ ]   Obstacle and field generation.
                 - [ ]   Ball placement.
         - [ ]   More Field components.
-            - [ ]   Conveyor
+            - [x]   Conveyor
             - [x]   Rotator
             - [ ]   Overlay-based stextures for all the fields.
     
