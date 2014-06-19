@@ -32,8 +32,8 @@
 
                 self.Goal = {};
 
-                self.Goal._radius = 8;
-                self.Goal._margin = 16;
+                self.Goal._radius = 2;
+                self.Goal._margin = 22;
 
                 self.Goal._speedLimit = 0.001;
 
