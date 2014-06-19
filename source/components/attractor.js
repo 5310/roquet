@@ -12,9 +12,11 @@
                 self.Attractor = {};
 
                 self.Attractor._radius = 24;
+                self.Attractor._margin = 0;
 
-                self.Attractor._setRadius = function(radius) {
-                    self.Attractor.radius = radius;
+                self.Attractor._setRadius = function(radius, margin) {
+                    self.Attractor._radius = radius;
+                    if ( margin !== undefined ) self.Attractor._margin = margin;
                     //TODO: Change body in-place, keeping all of state.
                     self.Attractor._setPhysicsBody();
                 };
@@ -34,17 +36,22 @@
                 self.Attractor._setPhysicsBody();
 
                 self.PhysicsSprite.addOverlay(function(shape, self) { //NOTE: Remember to call .PhysicsSprite.generateSprite() after altering direction.
+                    if ( self.Attractor._margin > 0 ) {
+                        shape.beginFill(0xffffff);
+                        shape.drawCircle(0, 0, self.Attractor._radius+self.Attractor._margin);
+                        shape.endFill();
+                    }
                     shape.beginFill(0x000000, 0);
                     shape.lineStyle(2, 0x000000);
                     //TODO:
                     var angle = Math.PI/4;
                     for (var i = 0; i < 4; i++ ) {
                         angle = i*Math.PI/2;
-                        var x = Math.cos(angle)*self.Attractor._radius*0.6;
-                        var y = Math.sin(angle)*self.Attractor._radius*0.6;
+                        var x = Math.cos(angle)*(self.Attractor._radius+self.Attractor._margin)*0.6;
+                        var y = Math.sin(angle)*(self.Attractor._radius+self.Attractor._margin)*0.6;
                         Crafty.COURT.graphicRoutines.shapes.arrow(
                             shape, self,
-                            self.Attractor._radius/3,
+                            (self.Attractor._radius+self.Attractor._margin)/3,
                             (angle+Math.PI)*Math.sign(self.PhysicsFieldAttractor.strength),
                             x, y);
                     }
