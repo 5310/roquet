@@ -56,7 +56,7 @@
 
 - [ ]   Beta:
 
-    - [x]   Gameplay.
+    - [ ]   Gameplay.
         - [x]   The Goal component.
             - [x]   Compose component with base components such as the attractor field.
             - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
@@ -83,6 +83,8 @@
         - [ ]   Score-screen.
         - [x]   Putting visual feedback.
         - [x]   Numeric overlays on active team's balls.
+
+    - [x]   Design and write the basic court.
         
 - [ ]   Pre-prototype-release:
 
