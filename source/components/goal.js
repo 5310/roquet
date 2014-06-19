@@ -55,7 +55,7 @@
                     .then(function() {
                         this.PhysicsFieldAttractor.strength = 0.005;
                         this.PhysicsFieldAttractor.order = 0.5;
-                        this.PhysicsFieldAttractor.friction = 0.99;
+                        this.PhysicsFieldAttractor.friction = 0.98;
                     });
                 };
                 self.Goal._setPhysicsBody();
