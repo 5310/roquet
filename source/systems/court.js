@@ -10,7 +10,7 @@
             _lastPoint: undefined,
 
             maxPuttForce: 0.0005,
-            maxPuttLength: 200,
+            maxPuttLength: 400,
 
             teams: {
                 NONE: 0,
