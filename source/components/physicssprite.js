@@ -66,7 +66,7 @@
 
                         case "rectangle":
                             var width = self.PhysicsBody.width;
-                            var height = self.PhysicsBody.width;
+                            var height = self.PhysicsBody.height;
                             shape.drawRect(-width/2, -height/2, width, height);
                             break;
 
