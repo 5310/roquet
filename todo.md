@@ -56,12 +56,12 @@
 
 - [ ]   Beta:
 
-    - [ ]   Gameplay.
+    - [x]   Gameplay.
         - [x]   The Goal component.
             - [x]   Compose component with base components such as the attractor field.
             - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
             - [x]   Goal number overlay.
-        - [ ]   The Court system.
+        - [x]   The Court system.
             - [x]   Turn-engine.
                 - [x]   Timed pausing bewteen turns.
                 - [x]   Turn order and available putt tracking.
@@ -69,12 +69,11 @@
             - [x]   Ball selection and shots.
                 - [x]   Ball validity check by turn order.
                 - [ ]   Bonus putts.
-            - [ ]   Scoring.
+            - [x]   Scoring.
                 - [x]   Goaling.
-                - [ ]   Win conditions.
-            - [ ]   Data-driven level generation.
-                - [ ]   Obstacle and field generation.
-                - [ ]   Ball placement.
+                - [x]   Win conditions.
+            - [x]   Data-driven level generation.
+                - [x]   Calcualtion of derived states.
         - [x]   More Field components.
             - [x]   Conveyor
             - [x]   Rotator
