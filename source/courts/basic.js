@@ -77,6 +77,39 @@
             goal4 = Crafty.e("Thennable", "Goal")
                 .PhysicsBodyPosition(400, 100)
 
+            pegGoal1Left = Crafty.e("Thennable", "Obstacle")
+                .PhysicsBodySet('circle', {
+                    x: 400-30,
+                    y: 100,
+                    radius: 8,
+                    treatment: 'static',
+                    mass: 10
+                });
+            pegGoal1Right = Crafty.e("Thennable", "Obstacle")
+                .PhysicsBodySet('circle', {
+                    x: 400+30,
+                    y: 100,
+                    radius: 8,
+                    treatment: 'static',
+                    mass: 10
+                });
+            pegGoal2Left = Crafty.e("Thennable", "Obstacle")
+                .PhysicsBodySet('circle', {
+                    x: 400-30,
+                    y: 380,
+                    radius: 8,
+                    treatment: 'static',
+                    mass: 10
+                });
+            pegGoal2Right = Crafty.e("Thennable", "Obstacle")
+                .PhysicsBodySet('circle', {
+                    x: 400+30,
+                    y: 380,
+                    radius: 8,
+                    treatment: 'static',
+                    mass: 10
+                });
+
             wedgeBottom = Crafty.e("Thennable", "Obstacle")
                 .PhysicsBodySet('convex-polygon', {
                     x: 400,
