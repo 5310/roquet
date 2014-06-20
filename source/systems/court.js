@@ -588,14 +588,13 @@
                     ) {
                         Crafty.COURT.gameOver = true;
                         console.log('WIN!'); //NOTE:
-                        // Victory routine.
+                        // Victory fanfare etc.
                     }
                 }
 
             },
 
             _tap: function(data) {
-                console.log("tap");
                 if ( Crafty.COURT.paused ) {
                     if ( Crafty.COURT._scoreScreen.visible ) {
                         Crafty.COURT._hideScoreScreen();
@@ -604,7 +603,6 @@
             },
 
             _doubleTap: function(data) {
-                console.log("doubletap");
                 if ( Crafty.COURT.paused ) {
                     Crafty.COURT.unpause();
                 } else {
