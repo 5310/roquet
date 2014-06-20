@@ -81,6 +81,7 @@
     
     - [ ]   In-game interface.
         - [ ]   Score-screen.
+        - [x]   Timer.
         - [x]   Putting visual feedback.
         - [x]   Numeric overlays on active team's balls.
 

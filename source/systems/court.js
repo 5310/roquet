@@ -303,7 +303,26 @@
                 Crafty.COURT._puttLine.endFill();
             },
 
-            scoreTarget: 6,
+            _timer: undefined,
+            _updateTimer: function() {
+
+                var time = Crafty.COURT.turnTime / Crafty.COURT.turnLimit; // 0 .. 1
+
+                var weights = [0.3125, 0.3125+0.1875, 1-0.1875]; // Time weights for the first three sides.
+
+                Crafty.COURT._timer.clear();
+                Crafty.COURT._timer.beginFill(0, 0);
+                Crafty.COURT._timer.lineStyle(4, 0xffffff);
+
+                Crafty.COURT._timer.moveTo(0, 0);
+                Crafty.COURT._timer.lineTo(800*(time >= weights[0] ? 1 : (time)/weights[0]), 0);
+                Crafty.COURT._timer.lineTo(800, 480*(time >= weights[1] ? 1 : (time-weights[0])/(weights[1]-weights[0])));
+                Crafty.COURT._timer.lineTo( 800*(1-(time >= weights[2] ? 1 : (time-weights[1])/(weights[2]-weights[1]))), 480);
+                Crafty.COURT._timer.lineTo(0, 480*(1-(time-(weights[2]))/(1-weights[2])));
+
+                Crafty.COURT._timer.endFill();
+
+            },
 
             paused: false,
             turnLimit: 200,
@@ -377,6 +396,11 @@
                 Crafty.COURT._puttLine = new PIXI.Graphics();
                 Crafty.COURT._puttLine.visible = false;
                 Crafty.COURT._effectsContainer.addChild(Crafty.COURT._puttLine);
+
+                // Set up the timer.
+                Crafty.COURT._timer = new PIXI.Graphics();
+                Crafty.COURT._effectsContainer.addChild(Crafty.COURT._timer);
+                Crafty.bind("PhysicsStep", Crafty.COURT._updateTimer);
 
             },
 
