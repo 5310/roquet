@@ -54,9 +54,9 @@
             - [x]   Write the attractor component.
         - [x]   Balance the physical properties of Balls, Obstacles, Goals and find usable range of force to putt with.
 
-- [ ]   Beta:
+- [x]   Beta:
 
-    - [ ]   Gameplay.
+    - [x]   Gameplay.
         - [x]   The Goal component.
             - [x]   Compose component with base components such as the attractor field.
             - [x]   Custom field to slow down bodies gradually and only trigger the goal event.
@@ -79,8 +79,8 @@
             - [x]   Rotator
             - [x]   Overlay-based stextures for all the fields.
     
-    - [ ]   In-game interface.
-        - [ ]   Score-screen.
+    - [x]   In-game interface.
+        - [x]   Score-screen.
         - [x]   Timer.
         - [x]   Putting visual feedback.
         - [x]   Numeric overlays on active team's balls.
