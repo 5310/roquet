@@ -130,10 +130,8 @@
 
 - [ ]   Prototype Release:
 
-    - [ ]   Write some modest "marketing" material.
+    - [ ]   Write a readme material.
     - [ ]   Publish to GH-pages.
-    - [ ]   Publish to Itch.io
-        - [ ]   Ask, or phrase, for donations; this isn't PWYW material, even if the minimum price is free.
     
 - [ ]   Post-prototype-release:
         
