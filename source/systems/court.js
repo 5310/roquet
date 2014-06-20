@@ -21,6 +21,8 @@
             },
             playingTeams: [],
 
+            gameOver: false,
+
             graphicRoutines: {
                 shapes: {
                     quad: function(shape, self, radius, x, y) {
@@ -403,7 +405,8 @@
 
             },
             _hideScoreScreen: function() {
-                Crafty.COURT._scoreScreen.visible = false;
+                if ( !Crafty.COURT.gameOver ) // Only let user hide screen when game not over.
+                    Crafty.COURT._scoreScreen.visible = false;
             },
 
             paused: false,
@@ -419,6 +422,7 @@
 
                 Crafty.bind("CourtGoalCaught", Crafty.COURT._goal);
 
+                Crafty.bind("HammerTap", Crafty.COURT._tap);
                 Crafty.bind("HammerDoubleTap", Crafty.COURT._doubleTap);
                 Crafty.bind("HammerHoldStart", Crafty.COURT._holdStart);
                 Crafty.bind("HammerHoldDrag", Crafty.COURT._holdDrag);
@@ -578,6 +582,7 @@
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >=
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].scoreTarget
                     ) {
+                        Crafty.COURT.gameOver = true;
                         console.log('WIN!'); //NOTE:
                         // Victory routine.
                     }
@@ -585,7 +590,17 @@
 
             },
 
+            _tap: function(data) {
+                console.log("tap");
+                if ( Crafty.COURT.paused ) {
+                    if ( Crafty.COURT._scoreScreen.visible ) {
+                        Crafty.COURT._hideScoreScreen();
+                    }
+                }
+            },
+
             _doubleTap: function(data) {
+                console.log("doubletap");
                 if ( Crafty.COURT.paused ) {
                     Crafty.COURT.unpause();
                 } else {
@@ -594,6 +609,10 @@
             },
 
             _holdStart: function(data) {
+
+                if ( Crafty.COURT._scoreScreen.visible ) { // If score screen is showing, don't initiate action.
+                    return;
+                }
 
                 // Check if current team has any putts left at all before working.
                 if ( Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].putts > 0 ) {
