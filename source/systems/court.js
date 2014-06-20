@@ -23,78 +23,86 @@
 
             graphicRoutines: {
                 shapes: {
-                    quad: function(shape, self, radius) {
+                    quad: function(shape, self, radius, x, y) {
+                        var x = x !== undefined ? x : 0;
+                        var y = y !== undefined ? y : 0;
                         var radius = radius ? radius : 10;
                         var squareWidth = radius;
-                        shape.drawRect(-0.5*squareWidth, -0.5*squareWidth, squareWidth, squareWidth);
+                        shape.drawRect(x-0.5*squareWidth, y-0.5*squareWidth, squareWidth, squareWidth);
                     },
-                    tri: function(shape, self, radius) {
+                    tri: function(shape, self, radius, x, y) {
+                        var x = x !== undefined ? x : 0;
+                        var y = y !== undefined ? y : 0;
                         var radius = radius ? radius : 10;
                         var triSpoke = radius*0.8;
-                        shape.moveTo(0, -triSpoke);
+                        shape.moveTo(x+0, y-triSpoke);
                         shape.lineTo(
-                            Math.cos(Math.PI/6)*triSpoke,
-                            Math.sin(Math.PI/6)*triSpoke
+                            x+Math.cos(Math.PI/6)*triSpoke,
+                            y+Math.sin(Math.PI/6)*triSpoke
                         );
                         shape.lineTo(
-                            -Math.cos(Math.PI/6)*triSpoke,
-                            Math.sin(Math.PI/6)*triSpoke
+                            x-Math.cos(Math.PI/6)*triSpoke,
+                            y+Math.sin(Math.PI/6)*triSpoke
                         );
-                        shape.lineTo(0, -triSpoke);
+                        shape.lineTo(x+0, y-triSpoke);
                     },
-                    star: function(shape, self, radius) {
+                    star: function(shape, self, radius, x, y) {
+                        var x = x !== undefined ? x : 0;
+                        var y = y !== undefined ? y : 0;
                         var radius = radius ? radius : 10;
                         var starSpoke = radius*0.75;
                         var starCrease = 0.6;
-                        shape.moveTo(0, -starSpoke);
+                        shape.moveTo(x+0, y-starSpoke);
                         shape.lineTo(
-                            Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
-                            -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
+                            x+Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
+                            y-Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
                         );
                         shape.lineTo(
-                            Math.cos(Crafty.math.degToRad(18))*starSpoke,
-                            -Math.sin(Crafty.math.degToRad(18))*starSpoke
+                            x+Math.cos(Crafty.math.degToRad(18))*starSpoke,
+                            y-Math.sin(Crafty.math.degToRad(18))*starSpoke
                         );
                         shape.lineTo(
-                            Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
-                            Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
+                            x+Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
+                            y+Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
                         );
                         shape.lineTo(
-                            Math.cos(Crafty.math.degToRad(54))*starSpoke,
-                            Math.sin(Crafty.math.degToRad(54))*starSpoke
+                            x+Math.cos(Crafty.math.degToRad(54))*starSpoke,
+                            y+Math.sin(Crafty.math.degToRad(54))*starSpoke
                         );
                         shape.lineTo(
-                            0,
-                            starSpoke*starCrease
+                            x+0,
+                            y+starSpoke*starCrease
                         );
                         shape.lineTo(
-                            -Math.cos(Crafty.math.degToRad(54))*starSpoke,
-                            Math.sin(Crafty.math.degToRad(54))*starSpoke
+                            x-Math.cos(Crafty.math.degToRad(54))*starSpoke,
+                            y+Math.sin(Crafty.math.degToRad(54))*starSpoke
                         );
                         shape.lineTo(
-                            -Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
-                            Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
+                            x-Math.cos(Crafty.math.degToRad(54-36))*starSpoke*starCrease,
+                            y+Math.sin(Crafty.math.degToRad(54-36))*starSpoke*starCrease
                         );
                         shape.lineTo(
-                            -Math.cos(Crafty.math.degToRad(18))*starSpoke,
-                            -Math.sin(Crafty.math.degToRad(18))*starSpoke
+                            x-Math.cos(Crafty.math.degToRad(18))*starSpoke,
+                            y-Math.sin(Crafty.math.degToRad(18))*starSpoke
                         );
                         shape.lineTo(
-                            -Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
-                            -Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
+                            x-Math.cos(Crafty.math.degToRad(18+36))*starSpoke*starCrease,
+                            y-Math.sin(Crafty.math.degToRad(18+36))*starSpoke*starCrease
                         );
-                        shape.lineTo(0, -starSpoke);
+                        shape.lineTo(x+0, y-starSpoke);
                     },
-                    hex: function(shape, self, radius) {
+                    hex: function(shape, self, radius, x, y) {
+                        var x = x !== undefined ? x : 0;
+                        var y = y !== undefined ? y : 0;
                         var radius = radius ? radius : 10;
                         var hexSpoke = radius*0.7;
                         shape.moveTo(0, -hexSpoke);
-                        shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                        shape.lineTo(Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                        shape.lineTo(0, hexSpoke);
-                        shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, Math.sin(Math.PI/6)*hexSpoke);
-                        shape.lineTo(-Math.cos(Math.PI/6)*hexSpoke, -Math.sin(Math.PI/6)*hexSpoke);
-                        shape.lineTo(0, -hexSpoke);
+                        shape.lineTo(x+Math.cos(Math.PI/6)*hexSpoke, y-Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(x+Math.cos(Math.PI/6)*hexSpoke, y+Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(x+0, y+hexSpoke);
+                        shape.lineTo(x-Math.cos(Math.PI/6)*hexSpoke, y+Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(x-Math.cos(Math.PI/6)*hexSpoke, y-Math.sin(Math.PI/6)*hexSpoke);
+                        shape.lineTo(x+0, y-hexSpoke);
                     },
                     arrow: function(shape, self, radius, angle, x, y) {
                         var radius = radius ? radius : 10;
@@ -306,22 +314,87 @@
             _timer: undefined,
             _updateTimer: function() {
 
+                var graphics = Crafty.COURT._timer;
+
                 var time = Crafty.COURT.turnTime / Crafty.COURT.turnLimit; // 0 .. 1
 
                 var weights = [0.3125, 0.3125+0.1875, 1-0.1875]; // Time weights for the first three sides.
 
-                Crafty.COURT._timer.clear();
-                Crafty.COURT._timer.beginFill(0, 0);
-                Crafty.COURT._timer.lineStyle(4, 0xffffff);
+                graphics.clear();
+                graphics.beginFill(0, 0);
+                graphics.lineStyle(4, 0xffffff);
 
-                Crafty.COURT._timer.moveTo(0, 0);
-                Crafty.COURT._timer.lineTo(800*(time >= weights[0] ? 1 : (time)/weights[0]), 0);
-                Crafty.COURT._timer.lineTo(800, 480*(time >= weights[1] ? 1 : (time-weights[0])/(weights[1]-weights[0])));
-                Crafty.COURT._timer.lineTo( 800*(1-(time >= weights[2] ? 1 : (time-weights[1])/(weights[2]-weights[1]))), 480);
-                Crafty.COURT._timer.lineTo(0, 480*(1-(time-(weights[2]))/(1-weights[2])));
+                graphics.moveTo(0, 0);
+                graphics.lineTo(800*(time >= weights[0] ? 1 : (time)/weights[0]), 0);
+                graphics.lineTo(800, 480*(time >= weights[1] ? 1 : (time-weights[0])/(weights[1]-weights[0])));
+                graphics.lineTo( 800*(1-(time >= weights[2] ? 1 : (time-weights[1])/(weights[2]-weights[1]))), 480);
+                graphics.lineTo(0, 480*(1-(time-(weights[2]))/(1-weights[2])));
 
-                Crafty.COURT._timer.endFill();
+                graphics.endFill();
 
+            },
+
+            _scoreScreen: undefined,
+            _initScoreScreen: function() {
+                Crafty.COURT._scoreScreen = new PIXI.Graphics();
+                Crafty.COURT._effectsContainer.addChild(Crafty.COURT._scoreScreen);
+            },
+            _showScoreScreen: function() {
+
+                var graphics = Crafty.COURT._scoreScreen;
+
+                graphics.clear();
+
+                // Shade.
+                graphics.beginFill(0x000000, 0.75);
+                graphics.drawRect(0, 0, 800, 480);
+                graphics.endFill();
+
+                //TODO: Blur?
+
+                // Scoreline.
+                graphics.beginFill(0xffffff, 1);
+                graphics.lineStyle(2, 0xffffff);
+                graphics.moveTo(100, 240);
+                graphics.lineTo(700, 240);
+                graphics.drawCircle(100, 240, 2);
+                graphics.drawCircle(700, 240, 8);
+                graphics.endFill();
+
+                // Score
+                for ( var i = 0; i < Crafty.COURT.playingTeams.length; i++ ) {
+
+                    var team = Crafty.COURT.playingTeams[i];
+                    var score = team.score/team.scoreTarget;
+                    var radius = 20*(score == 1 ? 2 : 1);
+
+                    // Shapes.
+                    graphics.beginFill(( i == Crafty.COURT.turnTeamIndex ? 0xffffff : 0x000000), 0.5);
+                    graphics.lineStyle(2, 0xffffff, 0.5);
+                    switch (team.team) {
+                        case 1:
+                            Crafty.COURT.graphicRoutines.shapes.quad(graphics, graphics, radius, 100+600*score, 240);
+                            break;
+                        case 2:
+                            Crafty.COURT.graphicRoutines.shapes.tri(graphics, graphics, radius*0.9, 100+600*score, 240+4);
+                            break;
+                        case 3:
+                            Crafty.COURT.graphicRoutines.shapes.star(graphics, graphics, radius, 100+600*score, 240);
+                            break;
+                        case 4:
+                            Crafty.COURT.graphicRoutines.shapes.hex(graphics, graphics, radius, 100+600*score, 240);
+                            break;
+                    }
+                    graphics.endFill();
+
+                }
+
+                // Show score.
+                Crafty.COURT._scoreScreen.visible = true;
+
+            },
+            _hideScoreScreen: function() {
+                Crafty.COURT._scoreScreen.visible = false;
             },
 
             paused: false,
@@ -402,18 +475,24 @@
                 Crafty.COURT._effectsContainer.addChild(Crafty.COURT._timer);
                 Crafty.bind("PhysicsStep", Crafty.COURT._updateTimer);
 
+                // Setup the score screen.
+                Crafty.COURT._initScoreScreen();
+                Crafty.COURT._showScoreScreen();
+
             },
 
             pause: function() {
                 Crafty.trigger('CourtPause');
                 Crafty.COURT.paused = true; // Set flag.
                 Crafty.PHYSICSSIMULATOR.world.pause(); // Pause physics.
+                Crafty.COURT._showScoreScreen(); // Show score screen.
             },
 
             unpause: function() {
                 Crafty.trigger('CourtUnpause');
                 Crafty.COURT.paused = false; // Set flag.
                 Crafty.PHYSICSSIMULATOR.world.unpause(); // Unpause physics.
+                Crafty.COURT._hideScoreScreen(); // Show score screen.
             },
 
             _step: function(meta) {
@@ -484,7 +563,7 @@
                             " own team: "+ball.Ball.team+
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
                     ball.Ball.makeWave();
-                    Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score++;
+                    Crafty.COURT.playingTeams[ball.Ball.team].score++;
                     ball.Ball.setNextGoal(--ball.Ball.nextGoal);
                     if (
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >=
@@ -498,7 +577,11 @@
             },
 
             _doubleTap: function(data) {
-                Crafty.COURT.unpause();
+                if ( Crafty.COURT.paused ) {
+                    Crafty.COURT.unpause();
+                } else {
+                    Crafty.COURT.pause();
+                }
             },
 
             _holdStart: function(data) {
