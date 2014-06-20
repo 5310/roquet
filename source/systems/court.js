@@ -576,8 +576,12 @@
                             " own team: "+ball.Ball.team+
                             " current team: "+Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].team); //NOTE:
                     ball.Ball.makeWave();
-                    Crafty.COURT.playingTeams[ball.Ball.team].score++;
+                    for ( var i = 0; i < Crafty.COURT.playingTeams.length; i++ ) { // Increment score of proper team. This is ugly!
+                        if ( Crafty.COURT.playingTeams[i].team == ball.Ball.team )
+                            Crafty.COURT.playingTeams[i].score++;
+                    }
                     ball.Ball.setNextGoal(--ball.Ball.nextGoal);
+                    ball.Ball.nextGoal--;
                     if (
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >=
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].scoreTarget
