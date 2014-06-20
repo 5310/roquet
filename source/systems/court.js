@@ -581,7 +581,6 @@
                             Crafty.COURT.playingTeams[i].score++;
                     }
                     ball.Ball.setNextGoal(--ball.Ball.nextGoal);
-                    ball.Ball.nextGoal--;
                     if (
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].score >=
                         Crafty.COURT.playingTeams[Crafty.COURT.turnTeamIndex].scoreTarget
