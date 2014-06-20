@@ -410,7 +410,7 @@
             },
 
             paused: false,
-            turnLimit: 200,
+            turnLimit: 500,
             turnTime: 0,
             turnTeamIndex: 0,
 
